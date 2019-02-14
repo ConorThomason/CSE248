@@ -29,7 +29,7 @@ class DollarConversionTest {
 	@Test
 	void testDollarConversion() {
 		double actual = 0;
-		Dollar dollar = new Dollar("CHF", 150.00, 1.5);
+		Dollar dollar = new Dollar("CHF", 150.00);
 		actual = dollar.getDollarAmount();
 		assertEquals(100.00, actual);
 	}
