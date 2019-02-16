@@ -13,11 +13,6 @@ public class NameWarehouse {
 	private ArrayList<String> femaleNames;
 	private ArrayList<String> lastNames;
 	
-	/* There is no need to worry about user-guided importing; these are
-	 * meant to be randomly generated, so having it be automated is fine.
-	 * However, that doesn't mean it's fine to reload them every time.
-	 * First check for the saved files existing, then import them if necessary.
-	*/
 	public NameWarehouse() {
 		this.maleNames = new ArrayList<String>();
 		this.femaleNames = new ArrayList<String>();
