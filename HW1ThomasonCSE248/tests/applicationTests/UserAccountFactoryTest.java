@@ -57,6 +57,7 @@ class UserAccountFactoryTest {
 				if (charSet.charAt(j) == password.charAt(i))
 					return true;
 			}
+			
 		}
 		return false;
 	}

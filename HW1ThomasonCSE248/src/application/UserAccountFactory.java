@@ -68,7 +68,7 @@ public class UserAccountFactory {
 		String lowerCaseSet = "abcdefghijklmnopqrstuvwxyz";
 		String numberSet = "1234567890";
 		int length = new Random().nextInt(30-8) + 8; //Upperbound = 30, lower = 8. Add 8 to guarantee 8 or more.
-		//Decide on initial placement of require spec. From then onwards, characters can be random (fillPasswordSpaces).
+		//Decide on initial placement of required char from spec. From then onwards, characters can be random (fillPasswordSpaces).
 		String password = generateEmptyString(length);
 		password = passwordRandomPosition(password, symbolSet);
 		password = passwordRandomPosition(password, upperCaseSet);
@@ -87,7 +87,7 @@ public class UserAccountFactory {
 	}
 	public String fillPasswordSpaces(String partialFill) {
 		StringBuilder finalPass = new StringBuilder(partialFill);
-		String allSet = " !\\\"#$%&'()*+,-.//:;<=>?@[\\\\]^_`{|}~ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+		String allSet = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 				+ "abcdefghijklmnopqrstuvwxyz1234567890";
 		for (int i = 0; i < partialFill.length(); i++) {
 			if (finalPass.charAt(i) == ' ') {
