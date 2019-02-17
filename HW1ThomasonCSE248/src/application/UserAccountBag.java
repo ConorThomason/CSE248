@@ -30,6 +30,13 @@ public class UserAccountBag {
 		else
 			return false;
 	}
+	public boolean passwordCheck(String userName, String password) {
+		User foundUser = this.findUser(userName);
+		if (foundUser != null) {
+			return foundUser.getPassword().equals(password);
+		}
+		return false;
+	}
 	public User findUser(String userName) {
 		return userTable.get(userName);
 	}
