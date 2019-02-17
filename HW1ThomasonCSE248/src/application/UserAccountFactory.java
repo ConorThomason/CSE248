@@ -117,7 +117,6 @@ public class UserAccountFactory {
 		String password = this.emitPassword();
 		double gpa = this.emitGpa();
 		User newUser = new User(firstName, lastName, gender, id, userName, password, gpa);
-		System.out.println(newUser);
 		return newUser;
 	}
 }
