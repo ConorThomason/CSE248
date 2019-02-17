@@ -10,12 +10,12 @@ class NameWarehouseTest {
 	NameWarehouse warehouse = new NameWarehouse();
 	@Test
 	void maleFirstNameTest() {
-		assertEquals("James", warehouse.getMaleName(3));
+		assertEquals("James", warehouse.getFirstName(3, false));
 	}
 	
 	@Test
 	void femaleFirstNameTest() {
-		assertEquals("Sophia", warehouse.getFemaleName(4));
+		assertEquals("Sophia", warehouse.getFirstName(4, true));
 	}
 	
 	@Test

@@ -12,6 +12,8 @@ public class NameWarehouse {
 	private ArrayList<String> maleNames;
 	private ArrayList<String> femaleNames;
 	private ArrayList<String> lastNames;
+	//ArrayList is used due to unknown size until import is complete, yet utilizes an
+	//index system that can be used in conjunction with bounded random numbers.
 	
 	public NameWarehouse() {
 		this.maleNames = new ArrayList<String>();
@@ -20,6 +22,21 @@ public class NameWarehouse {
 		this.importMaleNames();
 		this.importFemaleNames();
 		this.importLastNames();
+	}
+	public int getWarehouseSize(String type) {
+		switch(type) {
+		case "Male": return this.maleNames.size();
+		case "Female": return this.femaleNames.size();
+		case "Last Name": return this.lastNames.size();
+		default:
+			return -1;
+		}
+	}
+	public String getFirstName(int name, boolean female) {
+		if (female)
+			return getFemaleName(name);
+		else
+			return getMaleName(name);
 	}
 	public String getMaleName(int name) {
 		return maleNames.get(name);
@@ -31,15 +48,15 @@ public class NameWarehouse {
 		return lastNames.get(name);
 	}
 	private void importMaleNames() {
-		importNames("boys_names.txt", 0);
+		importNames("boys_names.txt", "Male");
 	}
 	private void importFemaleNames() {
-		importNames("girls_names.txt", 1);
+		importNames("girls_names.txt", "Female");
 	}
 	private void importLastNames() {
-		importNames("Last Names.txt", 2);
+		importNames("Last Names.txt", "Last Name");
 	}
-	private void importNames(String fileName, int type) {
+	private void importNames(String fileName, String type) {
 		File file = new File(fileName);
 		try {
 			Scanner scanner = new Scanner(file);
@@ -51,20 +68,17 @@ public class NameWarehouse {
 			e.printStackTrace();
 		}
 	}
-	private void patternCheck(String next, int type) {
-		//type == 0, male.
-		//type == 1, female.
-		//type == 2, last name.
+	private void patternCheck(String next, String type) {
 		String pattern = "([A-Z])\\w+";
 		Pattern r = Pattern.compile(pattern);
 		Matcher m = r.matcher(next);
 		if (m.find()) {
 			switch(type) {
-			case 0: maleNames.add(m.group(0));
+			case "Male": maleNames.add(m.group(0));
 				break;
-			case 1: femaleNames.add(m.group(0));
+			case "Female": femaleNames.add(m.group(0));
 				break;
-			case 2: lastNames.add(m.group(0));
+			case "Last Name": lastNames.add(m.group(0));
 				break;
 			default:
 				break;
