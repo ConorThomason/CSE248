@@ -18,6 +18,7 @@ public class Demo extends Application {
 	@Override
 	public void start(Stage arg0) throws Exception {
 		try {
+			arg0.setTitle("User Account Management System");
 			Parent root = FXMLLoader.load(getClass().getResource("/Scene.fxml"));
 			Scene scene = new Scene(root);
 			arg0.setScene(scene);

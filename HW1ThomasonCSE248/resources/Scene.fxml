@@ -30,37 +30,43 @@
             <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
          </padding>
       </HBox>
-      <VBox layoutX="14.0" layoutY="14.0" prefHeight="208.0" prefWidth="265.0">
+      <VBox layoutX="14.0" layoutY="7.0" prefHeight="224.0" prefWidth="265.0">
          <children>
-            <Label text="Current User Details" />
+            <Label fx:id="detailsDescription" text="Current User Details" />
             <HBox layoutX="10.0" layoutY="27.0" prefHeight="38.0" prefWidth="202.0">
                <children>
                   <Label alignment="CENTER" prefHeight="26.0" prefWidth="81.0" text="User:" textAlignment="CENTER" />
-                  <JFXTextField fx:id="loggedUserOutput" editable="false" />
-               </children>
-            </HBox>
-            <HBox layoutX="10.0" layoutY="27.0" prefHeight="38.0" prefWidth="202.0">
-               <children>
-                  <Label alignment="CENTER" prefHeight="26.0" prefWidth="81.0" text="First Name:" textAlignment="CENTER" />
-                  <JFXTextField fx:id="loggedFirstNameOutput" editable="false" />
-               </children>
-            </HBox>
-            <HBox layoutX="10.0" layoutY="65.0" prefHeight="38.0" prefWidth="202.0">
-               <children>
-                  <Label alignment="CENTER" prefHeight="26.0" prefWidth="81.0" text="Last Name:" textAlignment="CENTER" />
-                  <JFXTextField fx:id="loggedLastNameOutput" editable="false" />
+                  <JFXTextField fx:id="loggedUserOutput" disable="true" editable="false" />
                </children>
             </HBox>
             <HBox layoutX="10.0" layoutY="103.0" prefHeight="38.0" prefWidth="202.0">
                <children>
                   <Label alignment="CENTER" prefHeight="26.0" prefWidth="81.0" text="ID:" textAlignment="CENTER" />
-                  <JFXTextField fx:id="loggedIDOutput" editable="false" />
+                  <JFXTextField fx:id="loggedIDOutput" disable="true" editable="false" />
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="27.0" prefHeight="38.0" prefWidth="202.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="26.0" prefWidth="81.0" text="First Name:" textAlignment="CENTER" />
+                  <JFXTextField fx:id="loggedFirstNameOutput" disable="true" editable="false" onKeyReleased="#updateUserField" />
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="65.0" prefHeight="38.0" prefWidth="202.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="26.0" prefWidth="81.0" text="Last Name:" textAlignment="CENTER" />
+                  <JFXTextField fx:id="loggedLastNameOutput" disable="true" editable="false" onKeyReleased="#updateUserField" />
                </children>
             </HBox>
             <HBox layoutX="10.0" layoutY="141.0" prefHeight="38.0" prefWidth="202.0">
                <children>
                   <Label alignment="CENTER" prefHeight="26.0" prefWidth="81.0" text="Gender:" textAlignment="CENTER" />
-                  <JFXTextField fx:id="loggedGenderOutput" editable="false" />
+                  <JFXTextField fx:id="loggedGenderOutput" disable="true" editable="false" />
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="179.0" prefHeight="38.0" prefWidth="202.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="26.0" prefWidth="81.0" text="GPA:" textAlignment="CENTER" />
+                  <JFXTextField fx:id="loggedGPAOutput" disable="true" editable="false" />
                </children>
             </HBox>
          </children>
@@ -72,6 +78,8 @@
             <JFXPasswordField fx:id="signPassword" promptText="Password" />
          </children>
       </VBox>
-      <JFXButton fx:id="signConfirm" layoutX="380.0" layoutY="163.0" prefHeight="25.0" prefWidth="73.0" text="Confirm" />
+      <JFXButton fx:id="signConfirm" layoutX="380.0" layoutY="163.0" onAction="#handleConfirmButtonAction" prefHeight="25.0" prefWidth="73.0" text="Confirm" />
+      <JFXButton fx:id="signInToggle" disable="true" layoutX="333.0" layoutY="14.0" onAction="#handleSignButtonChangeToggle" prefHeight="25.0" prefWidth="73.0" text="Sign In" />
+      <JFXButton fx:id="signUpToggle" layoutX="417.0" layoutY="14.0" onAction="#handleSignButtonChangeToggle" prefHeight="25.0" prefWidth="73.0" text="Sign Up" />
    </children>
 </AnchorPane>

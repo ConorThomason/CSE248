@@ -6,9 +6,12 @@ import java.util.Random;
 
 public class UserAccountFactory {
 	private static int id = 1;
-	NameWarehouse warehouse;
+	private NameWarehouse warehouse;
 	public UserAccountFactory() {
 		this.warehouse = new NameWarehouse();
+	}
+	public int getId() {
+		return id;
 	}
 	public String emitLastName(int specificName) {
 		return warehouse.getLastName(specificName);
@@ -103,6 +106,12 @@ public class UserAccountFactory {
 		BigDecimal gpa = new BigDecimal(Double.toString(new Random().nextDouble() * 4));
 		return gpa.setScale(3, RoundingMode.HALF_EVEN).doubleValue();
 		//Next double returns a value [0.0, 1.0]. Multiplying by 4 brings it to the upper bound desired.
+	}
+	public User emitUserAccount(String firstName, String lastName, String gender, double gpa, String password) {
+		String id = this.emitId();
+		String userName = this.emitUserName(firstName, lastName, id);
+		User newUser = new User(firstName, lastName, gender, id, userName, password, gpa);
+		return newUser;
 	}
 	public User emitUserAccount() {
 		String gender = this.emitGender();

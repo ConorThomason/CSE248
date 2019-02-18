@@ -46,6 +46,6 @@ class UserAccountBagTest {
 		bag.insertUser(testUser1);
 		//Same keys (userName), searching should produce a user equal to testUser, not testUser1.
 		assertEquals(testUser, bag.findUser("TTest"));
-		assertTrue(bag.duplicateCheck(testUser)); //Double checking the duplicateCheck method.
+		assertTrue(bag.searchAccount(testUser.getUserName())); //Double checking the duplicateCheck method.
 	}
 }
