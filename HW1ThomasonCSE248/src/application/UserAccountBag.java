@@ -9,7 +9,6 @@ public class UserAccountBag {
 	private User currentUser = null;
 	public UserAccountBag() {
 		userFactory = new UserAccountFactory();
-		this.padUsers();
 	}
 	public void padUsers() {
 		for (int i = 0; i < 3000; i++) {

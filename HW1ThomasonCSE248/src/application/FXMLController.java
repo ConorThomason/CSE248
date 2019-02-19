@@ -52,6 +52,7 @@ public class FXMLController {
 	
 	
 	public void initialize() {
+		userBag.padUsers();
     }
 	
 	public void handleSignInConfirmAction(ActionEvent event) {
