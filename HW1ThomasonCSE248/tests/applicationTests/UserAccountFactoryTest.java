@@ -35,13 +35,13 @@ class UserAccountFactoryTest {
 	}
 	
 	@Test
-	void emitUserName() {
+	void emitUserNameTest() {
 		assertEquals("LKirk1", userFactory.emitUserName("Liam", "Kirkpatrick", "1"));
 		assertEquals("AFry1", userFactory.emitUserName("Ava", "Fry", "1"));
 	}
 	
 	@Test
-	void emitPassword() {
+	void emitPasswordTest() {
 		boolean passwordPasses = false;
 		String password = userFactory.emitPassword();
 		if (passwordContains(password, upperCaseSet) && passwordContains(password, symbolSet) &&
@@ -57,7 +57,6 @@ class UserAccountFactoryTest {
 				if (charSet.charAt(j) == password.charAt(i))
 					return true;
 			}
-			
 		}
 		return false;
 	}

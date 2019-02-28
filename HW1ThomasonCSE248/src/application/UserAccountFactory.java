@@ -1,5 +1,7 @@
 package application;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Random;
@@ -63,7 +65,7 @@ public class UserAccountFactory {
 	}
 	public String emitPassword() {
 		return generatePassword();
-		
+
 	}
 	public String generatePassword() {
 		String symbolSet = " !\"#$%&'()*+,-.//:;<=>?@[\\]^_`{|}~";
@@ -127,5 +129,43 @@ public class UserAccountFactory {
 		double gpa = this.emitGpa();
 		User newUser = new User(firstName, lastName, gender, id, userName, password, gpa);
 		return newUser;
+	}
+	public boolean verifyPassword(String password) {
+		String symbolSet = " !\"#$%&'()*+,-.//:;<=>?@[\\]^_`{|}~";
+		String upperCaseSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		String lowerCaseSet = "abcdefghijklmnopqrstuvwxyz";
+		String numberSet = "1234567890";
+		boolean passwordPasses = false;
+		if (passwordContains(password, upperCaseSet) && passwordContains(password, symbolSet) &&
+				passwordContains(password, lowerCaseSet) && passwordContains(password, numberSet)
+				&& password.length() >= 8) {
+			return true;
+		}
+		return false;
+	}
+	public String verifyGenderInput(String input) {
+		char firstCharacter = input.toLowerCase().charAt(0);
+		switch (firstCharacter) {
+			case 'm': return "Male";
+			case 'f': return "Female";
+			default: return "Invalid";
+		}
+	}
+	public double verifyGpaInput(double input) {
+		if (input < 0.0 || input > 4.0) {
+			return -1;
+		}
+		else {
+			return input;
+		}
+	}
+	private boolean passwordContains(String password, String charSet) {
+		for (int i = 0; i < password.length(); i++) {
+			for (int j = 0; j < charSet.length(); j++) {
+				if (charSet.charAt(j) == password.charAt(i))
+					return true;
+			}
+		}
+		return false;
 	}
 }

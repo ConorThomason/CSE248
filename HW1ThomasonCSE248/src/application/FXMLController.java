@@ -15,6 +15,9 @@ public class FXMLController {
 	private JFXTextField signUser;
 	
 	@FXML
+	private Label currentActionLabel;
+	
+	@FXML
 	private JFXPasswordField signPassword;
 	
 	@FXML
@@ -54,11 +57,8 @@ public class FXMLController {
 	public void initialize() {
 		userBag.padUsers();
     }
-	
-	public void handleSignInConfirmAction(ActionEvent event) {
-		
-	}
-	public void labelChange(String message) {
+
+	private void labelChange(String message) {
 		statusLabel.setText(message);
 	}
 	
@@ -79,7 +79,7 @@ public class FXMLController {
 			signIn();
 		}
 	}
-	public void signIn() {
+	private void signIn() {
 		if (userBag.searchAccount(signUser.getText(), signPassword.getText())) {
 			labelChange("Successful login as " + signUser.getText());
 			userBag.setCurrentUser(userBag.findUser(signUser.getText()));
@@ -92,25 +92,29 @@ public class FXMLController {
 			updateFields();
 		}
 	}
-	public void signUp() {
+	private void signUp() {
 		String firstName = loggedFirstNameOutput.getText();
 		String lastName = loggedLastNameOutput.getText();
-		String gender = loggedGenderOutput.getText();
-		double gpa = Double.parseDouble(loggedGPAOutput.getText());
+		String gender = userBag.getAccountFactory().verifyGenderInput(loggedGenderOutput.getText());
+		double gpa = userBag.getAccountFactory().verifyGpaInput(Double.parseDouble(loggedGPAOutput.getText()));
 		String password = signPassword.getText();
+		if (userBag.getAccountFactory().verifyPassword(password) && !gender.equals("Invalid") && gpa != -1.0) {
 		User newUser = userBag.createUser(firstName, lastName, gender, gpa, password);
 		if (userBag.insertUser(newUser)) {
 			labelChange("Successful creation of User Name " + newUser.getUserName());
-		} else {
+		} else if (userBag.getAccountFactory().verifyPassword(password)) {
 			labelChange("Unsuccessful creation of User");
+		}}
+		else {
+			labelChange("Invalid input in one or more fields; please check entries");
 		}
 		
 	}
-	public void emptyLoginFields() {
+	private void emptyLoginFields() {
 		signUser.setText("");
 		signPassword.setText("");
 	}
-	public void updateFields() {
+	private void updateFields() {
 		emptyFields();
 		if (userBag.getCurrentUser() != null) {
 			User currentUserClone = userBag.getCurrentUser();
@@ -122,7 +126,7 @@ public class FXMLController {
 			loggedIDOutput.setText(currentUserClone.getId());
 		}
 	}
-	public void emptyFields() {
+	private void emptyFields() {
 		loggedUserOutput.setText("");
 		loggedFirstNameOutput.setText("");
 		loggedLastNameOutput.setText("");
@@ -131,6 +135,7 @@ public class FXMLController {
 		loggedIDOutput.setText("");
 	}
 	public void updateUserField(Event event) {
+		try {
 		if (loggedFirstNameOutput.getText() != null && loggedLastNameOutput.getText() != null) {
 			loggedUserOutput.setText(userBag.emitUserName(loggedFirstNameOutput.getText(), 
 					loggedLastNameOutput.getText(), Integer.toString(userBag.getId())));
@@ -141,19 +146,27 @@ public class FXMLController {
 		}
 		else
 			loggedUserOutput.setText("");
-		
+		} catch (StringIndexOutOfBoundsException e) {
+			//nop
+		}
 	}
-	public void disableFieldToggle(boolean editable) {
-		if (editable)
+	private void disableFieldToggle(boolean editable) {
+		if (editable) {
+			signUser.setVisible(false);
 			detailsDescription.setText("Enter User Details For Registration");
-		else
+			currentActionLabel.setText("Sign up");
+		}
+		else {
+			signUser.setVisible(true);
+			currentActionLabel.setText("Sign in");
 			detailsDescription.setText("Current User Details");
+		}
 		loggedFirstNameOutput.setDisable(!editable);
 		loggedLastNameOutput.setDisable(!editable);
 		loggedGenderOutput.setDisable(!editable);
 		loggedGPAOutput.setDisable(!editable);
 	}
-	public void editableFieldToggle(boolean editable) {
+	private void editableFieldToggle(boolean editable) {
 		loggedFirstNameOutput.setEditable(editable);
 		loggedLastNameOutput.setEditable(editable);
 		loggedGenderOutput.setEditable(editable);

@@ -73,7 +73,7 @@
       </VBox>
       <VBox layoutX="300.0" layoutY="64.0" prefHeight="99.0" prefWidth="232.0" spacing="10.0">
          <children>
-            <Label text="Sign in" />
+            <Label fx:id="currentActionLabel" text="Sign in" />
             <JFXTextField fx:id="signUser" promptText="User name" />
             <JFXPasswordField fx:id="signPassword" promptText="Password" />
          </children>

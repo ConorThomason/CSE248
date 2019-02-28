@@ -1,5 +1,7 @@
 package application;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.HashMap;
 
 public class UserAccountBag {
@@ -71,10 +73,14 @@ public class UserAccountBag {
 		}
 		return false;
 	}
+	public UserAccountFactory getAccountFactory() {
+		return userFactory;
+	}
 	public User findUser(String userName) {
 		return userTable.get(userName);
 	}
 	public int getUserTableSize() {
 		return userTable.size();
 	}
+
 }
