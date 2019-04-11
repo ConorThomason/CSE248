@@ -2,13 +2,13 @@ package model;
 
 /**
  * The Employee class is superclass for both the Manager and Attendant classes.
- * Any password/username restrictions are handled by the Garage class.
+ * Any password/username restrictions are handled by the EmployeeManagement class.
  * 
  * @see <A href="../src/model/Employee.java">Java source code</A>
  * 
  * @author Conor Thomason <A href="mailto:thomc16@mail.sunysuffolk.edu"> thomc16@mail.sunysuffolk.edu </A>
  * 
- * @version V1.0, 4/8/2019
+ * @version V1.0, 4/11/2019
  *
  */
 
@@ -20,10 +20,10 @@ public class Employee {
 	
 	/**
 	 * Constructs Employee, this will rarely (if ever) happen on its own. Will usually be called as a superclass.
-	 * @param username
-	 * @param password
-	 * @param firstName
-	 * @param lastName
+	 * @param username String username, entry restrictions will be enforced upon entry to EmployeeManagement
+	 * @param password String password, may be encrypted later. Low priority task currently.
+	 * @param firstName String firstName, self-explanatory.
+	 * @param lastName String lastName, self-explanatory.
 	 */
 	public Employee(String username, String password, String firstName, String lastName) {
 		this.username = username;
