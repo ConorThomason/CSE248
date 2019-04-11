@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 public enum VehicleType {
 	CAR (20.00, 2.50), 
 	TRUCK (40.00, 5.00), 
