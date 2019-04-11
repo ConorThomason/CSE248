@@ -31,28 +31,59 @@ public class Employee {
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
-	
+	/**
+	 * 
+	 * @return username Returns employee's username
+	 */
 	public String getUsername() {
 		return username;
 	}
+	/**
+	 * 
+	 * @param username String (restrictions on creation are placed later)
+	 */
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	/**
+	 * 
+	 * @return password Returns String password (Encryption will be considered)
+	 */
 	public String getPassword() {
 		return password;
 	}
+	/**
+	 * 
+	 * @param password String sets Employee pass. (Encryption will be considered)
+	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	/**
+	 * 
+	 * @return String firstName
+	 */
 	public String getFirstName() {
 		return firstName;
 	}
+	/**
+	 * 
+	 * @param firstName String sets firstName. 
+	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+	/**
+	 * 
+	 * @return String lastName
+	 */
 	public String getLastName() {
 		return lastName;
 	}
+	/**
+	 * 
+	 * @param lastName String sets lastName
+	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
