@@ -9,16 +9,13 @@ import org.junit.jupiter.api.Test;
 
 import model.Garage;
 import model.PaymentScheme;
+import model.Vehicle;
+import model.VehicleType;
 
 class GarageTests {
 	ArrayList<PaymentScheme> carPayment = new ArrayList<PaymentScheme>();
 	ArrayList<PaymentScheme> truckPayment = new ArrayList<PaymentScheme>();
 	ArrayList<PaymentScheme> motorcyclePayment = new ArrayList<PaymentScheme>();
-	
-	@BeforeClass
-	void setup() {
-		
-	}
 	
 	@Test
 	void instantiationTest() {
@@ -30,9 +27,16 @@ class GarageTests {
 		assertTrue(garage.toString().equals("Car Spaces: 5, Motorcycle Spaces: 5, Truck Spaces: 5"));
 	}
 	
-//	@Test
-//	void addVehicleTest() {
-//		assertTrue(garage.addVehicle(new Vehicle(VehicleType.CAR, "Test", "TEST PLA")));
-//	}
+	@Test
+	void parkVehicleTest() {
+		Vehicle testVehicle = new Vehicle(VehicleType.CAR, "Test", "TEST PLA");
+		assertTrue(Garage.parkVehicle(testVehicle));
+		assertTrue(Garage.findVehicle(testVehicle.getLicensePlate()));
+	}
+	
+	@Test
+	void addToSpacetest() {
+		
+	}
 
 }

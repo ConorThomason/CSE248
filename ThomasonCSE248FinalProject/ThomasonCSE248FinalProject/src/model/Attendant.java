@@ -8,9 +8,7 @@ public class Attendant extends Employee {
 	
 	public boolean setParked(VehicleType vehicleType, String licensePlate) {
 		Vehicle vehicle = new Vehicle(vehicleType, this.getFirstName(), licensePlate);
-		if (Garage.hasVehicleSpace(vehicleType)) {
-			return addVehicle(vehicle);
-		}
+		Garage.parkVehicle(vehicle);
 		return false;
 	}
 	

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Space {
-	private String vehicleRegistration;
+	private String vehicleLicense;
 	private VehicleType vehicleType;
 	private Date timeDateParked;
 	private ArrayList<PaymentScheme> acceptedPaymentSchemes;
@@ -22,12 +22,12 @@ public class Space {
 		this.acceptedPaymentSchemes = acceptedPaymentSchemes;
 	}
 	
-	public String getVehicleRegistration() {
-		return vehicleRegistration;
+	public String getVehicleLicense() {
+		return vehicleLicense;
 		
 	}
-	public void setVehicleRegistration(String vehicleRegistration) {
-		this.vehicleRegistration = vehicleRegistration;
+	public void setVehicleLicense(String vehicleRegistration) {
+		this.vehicleLicense = vehicleRegistration;
 	}
 
 	public VehicleType getVehicleType() {

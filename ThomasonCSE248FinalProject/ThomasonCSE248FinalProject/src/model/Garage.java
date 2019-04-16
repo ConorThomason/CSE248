@@ -10,8 +10,11 @@ public class Garage {
 	private static EmployeeManagement employees;
 	private static ArrayList<Space> spaces;
 	private static int carSpaces;
+	private static int currentCars = 0;
 	private static int truckSpaces;
+	private static int currentTrucks = 0;
 	private static int motorcycleSpaces;
+	private static int currentMotorcycles = 0;
 	private static Garage _garage = new Garage();
 
 	private Garage() {}
@@ -25,6 +28,7 @@ public class Garage {
 		Garage.spaceSetup(VehicleType.CAR, Garage.carSpaces, carPaymentSchemes);
 		Garage.spaceSetup(VehicleType.TRUCK, Garage.truckSpaces, truckPaymentSchemes);
 		Garage.spaceSetup(VehicleType.MOTORCYCLE, Garage.motorcycleSpaces, motorcyclePaymentSchemes);
+		vehicles = new HashMap<String, Vehicle>((carSpaces + truckSpaces + motorcycleSpaces) * 2);
 		return _garage;
 	}
 	
@@ -35,16 +39,64 @@ public class Garage {
 		}
 	}
 	
-	//This will only ever be called upon the creation of a space by an attendant
-	public static boolean hasVehicleSpace(VehicleType vehicleType) {
-		boolean returnValue;
-		switch(vehicleType) {
-			case CAR: returnValue = (Garage.carSpaces != 0) ? true : false;
-			case MOTORCYCLE: returnValue = (Garage.motorcycleSpaces != 0) ? true : false;
-			case TRUCK: returnValue = (Garage.truckSpaces != 0) ? true : false;
-			default: returnValue = false;
+	private static boolean addVehicle(Vehicle vehicle) {
+		if (!Garage.findVehicle(vehicle.getLicensePlate())) {
+			vehicles.put(vehicle.getLicensePlate(), vehicle);
+			return true;
 		}
-		return returnValue;
+		return false;
+	}
+	
+	public static boolean spotAvailable(VehicleType type) {
+		boolean returnedValue;
+		switch(type) {
+		case CAR: returnedValue = (currentCars < carSpaces) ? true : false;
+			break;
+		case MOTORCYCLE: returnedValue = (currentMotorcycles < motorcycleSpaces) ? true : false;
+			break;
+		case TRUCK: returnedValue = (currentTrucks < truckSpaces) ? true : false;
+			break;
+		default: returnedValue = false;
+			break;
+		}
+		return returnedValue;
+	}
+	
+	public static boolean parkVehicle(Vehicle vehicle) {
+		if (spotAvailable(vehicle.getVehicleType())) {
+			switch(vehicle.getVehicleType()) {
+			case CAR:
+				vehicle.setParkingSpot(carSpaces - currentCars);
+				spaces.get(carSpaces - currentCars).setVehicleLicense(vehicle.getLicensePlate());
+				break;
+			case MOTORCYCLE:
+				vehicle.setParkingSpot(motorcycleSpaces - currentMotorcycles);
+				spaces.get(motorcycleSpaces - currentMotorcycles).setVehicleLicense(vehicle.getLicensePlate());
+				break;
+			case TRUCK:
+				vehicle.setParkingSpot(truckSpaces - currentTrucks);
+				spaces.get(truckSpaces - currentTrucks).setVehicleLicense(vehicle.getLicensePlate());
+				break;
+			default:
+				break;
+			}
+			addVehicle(vehicle);
+		} else {
+			removeVehicle(vehicle.getLicensePlate());
+		}
+		return false;
+	}
+	public static boolean findVehicle(String vehicleLicense) {
+		boolean returnedValue = (vehicles.get(vehicleLicense) == null) ? false : true;
+		return returnedValue;
+	}
+	
+	public static boolean removeVehicle(String vehicleLicense) {
+		if (findVehicle(vehicleLicense)) {
+			vehicles.remove(vehicleLicense);
+			return true;
+		}
+		return false;
 	}
 	
 	public static HashMap<String, Vehicle> getVehicles() {

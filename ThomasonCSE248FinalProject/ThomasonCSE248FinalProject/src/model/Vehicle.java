@@ -15,6 +15,7 @@ public class Vehicle {
 	
 	private VehicleType vehicleType;
 	private String parkedBy;
+	private int parkingSpot;
 	private String licensePlate;
 	
 	/**
@@ -30,6 +31,22 @@ public class Vehicle {
 		this.licensePlate = licensePlate;
 	}
 	
+	
+	/**
+	 * Sets current index position of Vehicle in the Garage spots list.
+	 * Will usually be set via an Attendant
+	 * @param parkingSpot - Returns pos, relevant to the List Spots in Garage class.
+	 */
+	public void setParkingSpot(int parkingSpot) {
+		this.parkingSpot = parkingSpot;
+	}
+	/**
+	 * Returns current index position of Vehicle in the Garage Spots List
+	 * @return int Index Returns pos (Used for distance calculations later)
+	 */
+	public int getParkingSpot() {
+		return parkingSpot;
+	}
 	/**
 	 * Returns entire VehicleType enum, not just the String.
 	 * @return Enum VehicleType  Returns entire enum, not just the string
