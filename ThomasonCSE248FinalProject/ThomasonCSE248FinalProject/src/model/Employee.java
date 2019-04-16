@@ -12,7 +12,7 @@ package model;
  *
  */
 
-public class Employee {
+public abstract class Employee extends Garage {
 	private String username;
 	private String password;
 	private String firstName;
@@ -26,6 +26,7 @@ public class Employee {
 	 * @param lastName String lastName, self-explanatory.
 	 */
 	public Employee(String username, String password, String firstName, String lastName) {
+		super();
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
@@ -93,4 +94,6 @@ public class Employee {
 		return "Username: " + this.username + ", Password: " + this.password
 				+ ", First Name: " + this.firstName + ", Last Name: " + this.lastName;
 	}
+	
+	public abstract boolean addVehicle(Vehicle vehicle);
 }
