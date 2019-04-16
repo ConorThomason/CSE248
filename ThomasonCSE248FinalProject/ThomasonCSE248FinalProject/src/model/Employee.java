@@ -12,7 +12,7 @@ package model;
  *
  */
 
-public abstract class Employee extends Garage {
+public class Employee {
 	private String username;
 	private String password;
 	private String firstName;
@@ -94,6 +94,4 @@ public abstract class Employee extends Garage {
 		return "Username: " + this.username + ", Password: " + this.password
 				+ ", First Name: " + this.firstName + ", Last Name: " + this.lastName;
 	}
-	
-	public abstract boolean addVehicle(Vehicle vehicle);
 }

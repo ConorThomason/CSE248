@@ -4,28 +4,30 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public abstract class Garage {
-	private HashMap<String, Vehicle> vehicles;
-	private EmployeeManagement employees;
-	private ArrayList<Space> spaces;
-	private int carSpaces;
-	private int truckSpaces;
-	private int motorcycleSpaces;
+public class Garage {
 	
+	private static HashMap<String, Vehicle> vehicles;
+	private static EmployeeManagement employees;
+	private static ArrayList<Space> spaces;
+	private static int carSpaces;
+	private static int truckSpaces;
+	private static int motorcycleSpaces;
+	private static Garage _garage = new Garage();
+
+	private Garage() {}
 	
-	public Garage(List<PaymentScheme> carPaymentSchemes, List<PaymentScheme> motorcyclePaymentSchemes, List<PaymentScheme> truckPaymentSchemes, 
+	public static Garage createGarage(List<PaymentScheme> carPaymentSchemes, List<PaymentScheme> motorcyclePaymentSchemes, List<PaymentScheme> truckPaymentSchemes, 
 			int carSpaces, int truckSpaces, int motorcycleSpaces) {
-		//Keep the payment scheme associated to the spaces, not the enum.
-		spaces = new ArrayList<Space>();
-		this.carSpaces = carSpaces;
-		this.truckSpaces = truckSpaces;
-		this.motorcycleSpaces = motorcycleSpaces;
-		this.spaceSetup(VehicleType.CAR, carSpaces, carPaymentSchemes);
-		this.spaceSetup(VehicleType.TRUCK, truckSpaces, carPaymentSchemes);
-		this.spaceSetup(VehicleType.MOTORCYCLE, motorcycleSpaces, carPaymentSchemes);
+		Garage.carSpaces = carSpaces;
+		Garage.truckSpaces = truckSpaces;
+		Garage.motorcycleSpaces = motorcycleSpaces;
+		Garage.spaceSetup(VehicleType.CAR, Garage.carSpaces, carPaymentSchemes);
+		Garage.spaceSetup(VehicleType.TRUCK, Garage.truckSpaces, truckPaymentSchemes);
+		Garage.spaceSetup(VehicleType.MOTORCYCLE, Garage.motorcycleSpaces, motorcyclePaymentSchemes);
+		return _garage;
 	}
 	
-	public void spaceSetup(VehicleType vehicleType, int numberOfSpaces, List<PaymentScheme> paymentScheme) {
+	public static void spaceSetup(VehicleType vehicleType, int numberOfSpaces, List<PaymentScheme> paymentScheme) {
 		for (int i = 0; i < numberOfSpaces; i++) {
 			spaces.add(new Space(vehicleType, paymentScheme));
 		}
@@ -35,20 +37,20 @@ public abstract class Garage {
 	public boolean hasVehicleSpace(VehicleType vehicleType) {
 		boolean returnValue;
 		switch(vehicleType) {
-			case CAR: returnValue = (this.carSpaces != 0) ? true : false;
-			case MOTORCYCLE: returnValue = (this.motorcycleSpaces != 0) ? true : false;
-			case TRUCK: returnValue = (this.truckSpaces != 0) ? true : false;
+			case CAR: returnValue = (Garage.carSpaces != 0) ? true : false;
+			case MOTORCYCLE: returnValue = (Garage.motorcycleSpaces != 0) ? true : false;
+			case TRUCK: returnValue = (Garage.truckSpaces != 0) ? true : false;
 			default: returnValue = false;
 		}
 		return returnValue;
 	}
-	public abstract boolean addVehicle(Vehicle vehicle);
+	
 	public HashMap<String, Vehicle> getVehicles() {
 		return vehicles;
 	}
 	@Override
 	public String toString() {
-		return "Car Spaces: " + carSpaces + ", Motorcycle Spaces: " + motorcycleSpaces + ", Truck Spaces: " +
-				truckSpaces;
+		return "Car Spaces: " + Garage.carSpaces + ", Motorcycle Spaces: " + Garage.motorcycleSpaces + ", Truck Spaces: " +
+				Garage.truckSpaces;
 	}
 }
