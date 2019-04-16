@@ -10,8 +10,7 @@ class AttendantTests {
 
 	@Test
 	void instantiationTest() {
-		Attendant attendant = new Attendant();
-		
+		fail("Unimplemented method");
 	}
 
 }

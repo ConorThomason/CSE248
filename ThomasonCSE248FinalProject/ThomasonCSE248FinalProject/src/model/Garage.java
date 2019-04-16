@@ -16,25 +16,27 @@ public class Garage {
 
 	private Garage() {}
 	
-	public static Garage createGarage(List<PaymentScheme> carPaymentSchemes, List<PaymentScheme> motorcyclePaymentSchemes, List<PaymentScheme> truckPaymentSchemes, 
+	public static Garage createGarage(ArrayList<PaymentScheme> carPaymentSchemes, ArrayList<PaymentScheme> motorcyclePaymentSchemes, ArrayList<PaymentScheme> truckPaymentSchemes, 
 			int carSpaces, int truckSpaces, int motorcycleSpaces) {
 		Garage.carSpaces = carSpaces;
 		Garage.truckSpaces = truckSpaces;
 		Garage.motorcycleSpaces = motorcycleSpaces;
+		Garage.spaces = new ArrayList<Space>();
 		Garage.spaceSetup(VehicleType.CAR, Garage.carSpaces, carPaymentSchemes);
 		Garage.spaceSetup(VehicleType.TRUCK, Garage.truckSpaces, truckPaymentSchemes);
 		Garage.spaceSetup(VehicleType.MOTORCYCLE, Garage.motorcycleSpaces, motorcyclePaymentSchemes);
 		return _garage;
 	}
 	
-	public static void spaceSetup(VehicleType vehicleType, int numberOfSpaces, List<PaymentScheme> paymentScheme) {
+	public static void spaceSetup(VehicleType vehicleType, int numberOfSpaces, ArrayList<PaymentScheme> paymentScheme) {
 		for (int i = 0; i < numberOfSpaces; i++) {
-			spaces.add(new Space(vehicleType, paymentScheme));
+			Space newSpace = new Space(vehicleType, paymentScheme);
+			spaces.add(newSpace);
 		}
 	}
 	
 	//This will only ever be called upon the creation of a space by an attendant
-	public boolean hasVehicleSpace(VehicleType vehicleType) {
+	public static boolean hasVehicleSpace(VehicleType vehicleType) {
 		boolean returnValue;
 		switch(vehicleType) {
 			case CAR: returnValue = (Garage.carSpaces != 0) ? true : false;
@@ -45,7 +47,7 @@ public class Garage {
 		return returnValue;
 	}
 	
-	public HashMap<String, Vehicle> getVehicles() {
+	public static HashMap<String, Vehicle> getVehicles() {
 		return vehicles;
 	}
 	@Override
