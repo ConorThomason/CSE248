@@ -28,7 +28,7 @@ public class Vehicle {
 	public Vehicle(VehicleType vehicleType, String parkedBy, String licensePlate) {
 		this.vehicleType = vehicleType;
 		this.parkedBy = parkedBy;
-		this.licensePlate = licensePlate;
+		setLicensePlate(licensePlate);
 	}
 	
 	

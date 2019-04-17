@@ -2,7 +2,6 @@ package model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class Garage {
 	
@@ -26,8 +25,8 @@ public class Garage {
 		Garage.motorcycleSpaces = motorcycleSpaces;
 		Garage.spaces = new ArrayList<Space>();
 		Garage.spaceSetup(VehicleType.CAR, Garage.carSpaces, carPaymentSchemes);
-		Garage.spaceSetup(VehicleType.TRUCK, Garage.truckSpaces, truckPaymentSchemes);
 		Garage.spaceSetup(VehicleType.MOTORCYCLE, Garage.motorcycleSpaces, motorcyclePaymentSchemes);
+		Garage.spaceSetup(VehicleType.TRUCK, Garage.truckSpaces, truckPaymentSchemes);
 		vehicles = new HashMap<String, Vehicle>((carSpaces + truckSpaces + motorcycleSpaces) * 2);
 		return _garage;
 	}
@@ -63,32 +62,50 @@ public class Garage {
 	}
 	
 	public static boolean parkVehicle(Vehicle vehicle) {
+		int carOffset = carSpaces - currentCars;
+		int motorcycleOffset = carSpaces + (motorcycleSpaces - currentMotorcycles);
+		int truckOffset = carSpaces + motorcycleSpaces + (truckSpaces - currentTrucks);
 		if (spotAvailable(vehicle.getVehicleType())) {
 			switch(vehicle.getVehicleType()) {
 			case CAR:
-				vehicle.setParkingSpot(carSpaces - currentCars);
+				vehicle.setParkingSpot(carOffset);
 				spaces.get(carSpaces - currentCars).setVehicleLicense(vehicle.getLicensePlate());
 				break;
 			case MOTORCYCLE:
-				vehicle.setParkingSpot(motorcycleSpaces - currentMotorcycles);
+				vehicle.setParkingSpot(motorcycleOffset);
 				spaces.get(motorcycleSpaces - currentMotorcycles).setVehicleLicense(vehicle.getLicensePlate());
 				break;
 			case TRUCK:
-				vehicle.setParkingSpot(truckSpaces - currentTrucks);
+				vehicle.setParkingSpot(truckOffset);
 				spaces.get(truckSpaces - currentTrucks).setVehicleLicense(vehicle.getLicensePlate());
 				break;
 			default:
 				break;
 			}
 			addVehicle(vehicle);
-		} else {
-			removeVehicle(vehicle.getLicensePlate());
+			return true;
 		}
 		return false;
 	}
+	public static void printVehiclesKeySet() {
+		System.out.println("Printing Vehicles");
+		for (String vehicleLicense : vehicles.keySet()) {
+			System.out.println(vehicleLicense);
+		}
+		System.out.println("Done printing vehicles \n");
+	}
+	public static Vehicle getVehicle(String vehicleLicense) {
+		if (findVehicle(vehicleLicense)) {
+			return vehicles.get(vehicleLicense);
+		}
+		return null;
+	}
+	
 	public static boolean findVehicle(String vehicleLicense) {
-		boolean returnedValue = (vehicles.get(vehicleLicense) == null) ? false : true;
-		return returnedValue;
+		if (vehicles.get(vehicleLicense) == null) {
+			return false;
+		}
+		return true;
 	}
 	
 	public static boolean removeVehicle(String vehicleLicense) {
@@ -102,8 +119,8 @@ public class Garage {
 	public static HashMap<String, Vehicle> getVehicles() {
 		return vehicles;
 	}
-	@Override
-	public String toString() {
+	
+	public static String garageDetails() {
 		return "Car Spaces: " + Garage.carSpaces + ", Motorcycle Spaces: " + Garage.motorcycleSpaces + ", Truck Spaces: " +
 				Garage.truckSpaces;
 	}
