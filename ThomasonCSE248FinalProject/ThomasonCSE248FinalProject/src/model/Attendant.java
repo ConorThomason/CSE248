@@ -11,9 +11,4 @@ public class Attendant extends Employee {
 		Garage.parkVehicle(vehicle);
 		return false;
 	}
-	
-	public boolean addVehicle(Vehicle vehicle) {
-		
-		return false;
-	}
 }

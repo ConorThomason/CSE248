@@ -89,6 +89,10 @@ public class Employee {
 		this.lastName = lastName;
 	}
 	
+	public String getFullName() {
+		return getFirstName() + " " + getLastName();
+	}
+	
 	@Override
 	public String toString() {
 		return "Username: " + this.username + ", Password: " + this.password
