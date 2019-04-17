@@ -17,7 +17,7 @@ public class Ticket {
 		setLicensePlate(licensePlate);
 		this.vehicleType = vehicleCategory;
 		this.attendantName = attendantName;
-		this.dateAndTime = dateAndTime.toString();
+		setDateAndTime(dateAndTime);
 		this.paymentScheme = paymentScheme;
 		
 	}
@@ -60,7 +60,7 @@ public class Ticket {
 	}
 
 	public void setDateAndTime(Clock dateAndTime) {
-		this.dateAndTime = dateAndTime.toString();
+		this.dateAndTime = Utils.timeDateZoneConversion(dateAndTime);
 	}
 
 	public PaymentScheme getPaymentScheme() {
