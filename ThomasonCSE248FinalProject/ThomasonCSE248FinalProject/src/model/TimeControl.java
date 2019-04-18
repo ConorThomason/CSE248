@@ -13,36 +13,36 @@ public class TimeControl extends Thread {
 	private TimeControl() {}
 
 	public static void createTimeThread(long scale) {
-		final long timeScale = scale;
 		whenStarted = Instant.now();
-		timeThread = new Thread() {
-			public void run() {
-				long multiplier = timeScale;
-				while (!Thread.currentThread().isInterrupted()) {
-					try {
-						Thread.sleep(1000);
-						System.out.println(nextInstant(multiplier));
-						
-						nextInstant(multiplier);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-
-				}
-			}
-		};
+		timeThread = new Thread(incrementTime(scale));
 		timeThread.run();
+
 	}
-	
+
+	public static Runnable incrementTime(long multiplier) {
+		return () -> {
+			try {
+				while(!Thread.currentThread().isInterrupted()) {
+					System.out.println(clockDefaultZone());
+					Thread.sleep(1000);
+					nextInstant(multiplier);
+				}
+			} catch (InterruptedException e) {
+				//nop
+			}
+			nextInstant(multiplier);
+		};
+	}
+
 	public static Clock clockDefaultZone() {
 		return Clock.fixed(whenStarted, defaultZone);
 	}
-	
+
 	private static String nextInstant(long timeScale) {
-		whenStarted = whenStarted.plusMillis(500 * timeScale);
+		whenStarted = whenStarted.plusSeconds(1 * timeScale);
 		return whenStarted.toString();
 	}
-	
+
 	public static void stopTime() {
 		timeThread.interrupt();
 	}
