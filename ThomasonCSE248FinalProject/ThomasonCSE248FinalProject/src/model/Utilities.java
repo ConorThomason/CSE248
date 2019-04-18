@@ -2,7 +2,7 @@ package model;
 
 import java.time.Clock;
 
-public final class Utils {
+public final class Utilities {
 	
 	public static String timeDateZoneConversion(Clock dateAndTime) {
 		String createdString = dateAndTime.toString();

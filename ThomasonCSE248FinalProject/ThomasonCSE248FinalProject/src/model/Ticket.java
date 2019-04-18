@@ -27,6 +27,7 @@ public class Ticket {
 		this.vehicleType = vehicle.getVehicleType();
 		this.attendantName = attendant.getFullName();
 		this.paymentScheme = paymentScheme;
+		setDateAndTime(Clock.systemDefaultZone());
 	}
 	
 	public String getLicensePlate() {
@@ -39,11 +40,11 @@ public class Ticket {
 		this.licensePlate = licensePlate;
 	}
 
-	public VehicleType getVehicleCategory() {
+	public VehicleType getVehicleType() {
 		return vehicleType;
 	}
 
-	public void setVehicleCategory(VehicleType vehicleCategory) {
+	public void setVehicleType(VehicleType vehicleCategory) {
 		this.vehicleType = vehicleCategory;
 	}
 
@@ -60,7 +61,7 @@ public class Ticket {
 	}
 
 	public void setDateAndTime(Clock dateAndTime) {
-		this.dateAndTime = Utils.timeDateZoneConversion(dateAndTime);
+		this.dateAndTime = Utilities.timeDateZoneConversion(dateAndTime);
 	}
 
 	public PaymentScheme getPaymentScheme() {
@@ -72,8 +73,8 @@ public class Ticket {
 	}
 	@Override
 	public String toString() {
-		return "License Plate: " + licensePlate + ", Vehicle Type: " + vehicleType.toString() + 
-				", Attendant Name: " + attendantName + ", Date/Time: " + dateAndTime + ", "
+		return "License Plate: " + licensePlate + "\nVehicle Type: " + vehicleType.toString() + 
+				"\nAttendant Name: " + attendantName + "\nDate/Time: " + dateAndTime + "\n"
 						+ "Payment Scheme: " + paymentScheme;
 	}
 	
