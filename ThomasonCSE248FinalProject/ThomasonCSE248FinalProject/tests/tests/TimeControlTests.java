@@ -11,8 +11,14 @@ class TimeControlTests {
 	@Test
 	void test() {
 		TimeControl.createTimeThread(1);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		TimeControl.stopTime();
-		System.out.println(TimeControl.clockDefaultZone());
+		System.out.println("Finished execution");
 		assertTrue(true);
 	}
 

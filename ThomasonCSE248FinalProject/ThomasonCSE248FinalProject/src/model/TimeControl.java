@@ -14,11 +14,40 @@ public class TimeControl extends Thread {
 
 	public static void createTimeThread(long scale) {
 		whenStarted = Instant.now();
-		timeThread = new Thread(incrementTime(scale));
-		timeThread.run();
+		Time scaledTime = new Time(scale);
+		timeThread = new Thread(scaledTime, "time");
+		timeThread.start();
 
 	}
-
+	
+static class Time implements Runnable{
+	
+	private static volatile boolean exit = false;
+	private long multiplier;
+	public Time(long multiplier) {
+		this.multiplier = multiplier;
+	}
+	
+	@Override
+	public void run() {
+			try {
+				while(!exit) {
+					System.out.println(clockDefaultZone());
+					Thread.sleep(1000);
+					nextInstant(multiplier);
+				}
+			} catch (InterruptedException e) {
+				//nop
+			}
+			nextInstant(multiplier);
+		
+	}
+	
+	public static void stop() {
+		exit = true;
+	}
+	
+}
 	public static Runnable incrementTime(long multiplier) {
 		return () -> {
 			try {
@@ -44,6 +73,6 @@ public class TimeControl extends Thread {
 	}
 
 	public static void stopTime() {
-		timeThread.interrupt();
+		Time.stop();
 	}
 }
