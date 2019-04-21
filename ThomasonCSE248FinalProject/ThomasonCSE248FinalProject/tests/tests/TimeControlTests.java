@@ -9,7 +9,7 @@ import model.TimeControl;
 class TimeControlTests {
 
 	@Test
-	void test() {
+	void controlTimeTest() {
 		TimeControl.createTimeThread(1);
 		try {
 			Thread.sleep(5000);
@@ -18,8 +18,7 @@ class TimeControlTests {
 			e.printStackTrace();
 		}
 		TimeControl.stopTime();
-		System.out.println("Finished execution");
+		//Won't actually get this far without being able to stop the time.
 		assertTrue(true);
 	}
-
 }
