@@ -21,5 +21,4 @@ class TimeControlTests {
 		System.out.println("Finished execution");
 		assertTrue(true); //If it makes it this far, the thread stopped successfully.
 	}
-
 }

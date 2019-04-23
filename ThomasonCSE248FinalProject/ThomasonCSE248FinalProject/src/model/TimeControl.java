@@ -48,20 +48,6 @@ static class Time implements Runnable{
 	}
 	
 }
-	public static Runnable incrementTime(long multiplier) {
-		return () -> {
-			try {
-				while(!Thread.currentThread().isInterrupted()) {
-					System.out.println(clockDefaultZone());
-					Thread.sleep(1000);
-					nextInstant(multiplier);
-				}
-			} catch (InterruptedException e) {
-				//nop
-			}
-			nextInstant(multiplier);
-		};
-	}
 
 	public static Clock clockDefaultZone() {
 		return Clock.fixed(whenStarted, defaultZone);
