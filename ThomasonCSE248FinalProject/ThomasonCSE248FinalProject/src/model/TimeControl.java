@@ -20,6 +20,18 @@ public class TimeControl extends Thread {
 
 	}
 	
+	public static void createSpecificTimeThread(long scale, Instant instant) {
+		whenStarted = instant;
+		Time scaledTime = new Time(scale);
+		timeThread = new Thread(scaledTime, "time");
+		timeThread.start();
+	}
+	
+	public static void changeMultiplier(long multiplier) {
+		Time.stop();
+		createSpecificTimeThread(multiplier, whenStarted);
+		
+	}
 	public static Instant getCurrentTime() {
 		return whenStarted;
 	}
