@@ -9,8 +9,8 @@ import model.TimeControl;
 class TimeControlTests {
 
 	@Test
-	void test() {
-		TimeControl.createTimeThread(1);
+	void timeControlTest() {
+		TimeControl.createTimeThread((long)1);
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -19,7 +19,7 @@ class TimeControlTests {
 		}
 		TimeControl.stopTime();
 		System.out.println("Finished execution");
-		assertTrue(true);
+		assertTrue(true); //If it makes it this far, the thread stopped successfully.
 	}
 
 }
