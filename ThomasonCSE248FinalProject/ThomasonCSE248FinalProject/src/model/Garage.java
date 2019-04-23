@@ -46,7 +46,7 @@ public class Garage {
 		return false;
 	}
 	
-	public static boolean spotAvailable(VehicleType type) {
+	public static boolean spaceAvailable(VehicleType type) {
 		boolean returnedValue;
 		switch(type) {
 		case CAR: returnedValue = (currentCars < carSpaces) ? true : false;
@@ -61,11 +61,15 @@ public class Garage {
 		return returnedValue;
 	}
 	
+	public static Space getSpace(int spaceIndex) {
+		return spaces.get(spaceIndex);
+	}
+	
 	public static boolean parkVehicle(Vehicle vehicle) {
 		int carOffset = carSpaces - currentCars;
 		int motorcycleOffset = carSpaces + (motorcycleSpaces - currentMotorcycles);
 		int truckOffset = carSpaces + motorcycleSpaces + (truckSpaces - currentTrucks);
-		if (spotAvailable(vehicle.getVehicleType())) {
+		if (spaceAvailable(vehicle.getVehicleType())) {
 			switch(vehicle.getVehicleType()) {
 			case CAR:
 				vehicle.setParkingSpot(carOffset);

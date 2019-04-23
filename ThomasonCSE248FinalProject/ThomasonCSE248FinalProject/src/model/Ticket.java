@@ -1,8 +1,5 @@
 package model;
 
-import java.time.Clock;
-import java.util.Date;
-
 public class Ticket {
 	String licensePlate;
 	VehicleType vehicleType;
@@ -13,11 +10,11 @@ public class Ticket {
 	
 	//This constructor exists to force a date/time using Clock
 	public Ticket(String licensePlate, VehicleType vehicleCategory, 
-			String attendantName, PaymentScheme paymentScheme, Clock dateAndTime) {
+			String attendantName, PaymentScheme paymentScheme) {
 		setLicensePlate(licensePlate);
 		this.vehicleType = vehicleCategory;
 		this.attendantName = attendantName;
-		setDateAndTime(dateAndTime);
+		setDateAndTime();
 		this.paymentScheme = paymentScheme;
 		
 	}
@@ -26,8 +23,8 @@ public class Ticket {
 		setLicensePlate(vehicle.getLicensePlate());
 		this.vehicleType = vehicle.getVehicleType();
 		this.attendantName = attendant.getFullName();
+		setDateAndTime();
 		this.paymentScheme = paymentScheme;
-		setDateAndTime(Clock.systemDefaultZone());
 	}
 	
 	public String getLicensePlate() {
@@ -60,8 +57,8 @@ public class Ticket {
 		return dateAndTime;
 	}
 
-	public void setDateAndTime(Clock dateAndTime) {
-		this.dateAndTime = Utilities.timeDateZoneConversion(dateAndTime);
+	public void setDateAndTime() {
+		this.dateAndTime = Utilities.zoneStringFormat(TimeControl.getCurrentTime());
 	}
 
 	public PaymentScheme getPaymentScheme() {

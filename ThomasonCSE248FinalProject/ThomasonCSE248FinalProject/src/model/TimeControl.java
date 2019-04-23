@@ -20,6 +20,13 @@ public class TimeControl extends Thread {
 
 	}
 	
+	public static Instant getCurrentTime() {
+		return whenStarted;
+	}
+	
+	public static ZoneId getDefaultZone() {
+		return defaultZone;
+	}
 static class Time implements Runnable{
 	
 	private static volatile boolean exit = false;
@@ -32,7 +39,6 @@ static class Time implements Runnable{
 	public void run() {
 			try {
 				while(!exit) {
-					System.out.println(clockDefaultZone());
 					Thread.sleep(1000);
 					nextInstant(multiplier);
 				}

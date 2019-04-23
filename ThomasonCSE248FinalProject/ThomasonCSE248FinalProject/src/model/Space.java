@@ -1,24 +1,18 @@
 package model;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Space {
 	private String vehicleLicense;
 	private VehicleType vehicleType;
-	private Date timeDateParked;
+	private Instant timeDateParked;
 	private ArrayList<PaymentScheme> acceptedPaymentSchemes;
 	
 	public Space(VehicleType vehicleType, ArrayList<PaymentScheme> acceptedPaymentSchemes) {
 		this.vehicleType = vehicleType;
-		this.timeDateParked = new Date();
-		this.acceptedPaymentSchemes = acceptedPaymentSchemes;
-	}
-	
-	//This class exists for the purpose of testing only. Would never be used live.
-	public Space(VehicleType vehicleType, ArrayList<PaymentScheme> acceptedPaymentSchemes, Date forcedDate) {
-		this.vehicleType = vehicleType;
-		this.timeDateParked = forcedDate;
+		this.timeDateParked = TimeControl.getCurrentTime();
 		this.acceptedPaymentSchemes = acceptedPaymentSchemes;
 	}
 	
@@ -38,11 +32,11 @@ public class Space {
 		this.vehicleType = vehicleType;
 	}
 
-	public Date getTimeDateParked() {
+	public Instant getTimeDateParked() {
 		return timeDateParked;
 	}
 
-	public void setTimeDateParked(Date timeDateParked) {
+	public void setTimeDateParked(Instant timeDateParked) {
 		this.timeDateParked = timeDateParked;
 	}
 
