@@ -10,7 +10,6 @@ public class Receipt extends Ticket {
 		super(vehicle, attendant, paymentScheme);
 		setCalculatedRate(vehicle);
 	}
-	
 	public void setCalculatedRate(Vehicle vehicle) {
 		this.chargedAndPaid = getCalculatedRate(vehicle);
 		//TODO Add early bird pricing

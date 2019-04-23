@@ -5,8 +5,8 @@ public enum VehicleType {
 	TRUCK (40.00, 5.00), 
 	MOTORCYCLE (10.00, 1.00);
 	
-	private final double earlyBird;
-	private final double hourlyRate;
+	private double earlyBird;
+	private double hourlyRate;
 	
 	VehicleType (double earlyBird, double hourlyRate){
 		this.earlyBird = earlyBird;
@@ -18,5 +18,12 @@ public enum VehicleType {
 	}
 	public double getEarlyBirdPrice() {
 		return earlyBird;
+	}
+	public void setHourlyRate(double newRate) {
+		this.hourlyRate = newRate;
+	}
+	
+	public void setEarlyBird(double newRate) {
+		this.earlyBird = newRate;
 	}
 }
