@@ -12,11 +12,14 @@ public class Receipt extends Ticket {
 	}
 	
 	public void setCalculatedRate(Vehicle vehicle) {
+		this.chargedAndPaid = getCalculatedRate(vehicle);
+		//TODO Add early bird pricing
+	}
+	public double getCalculatedRate(Vehicle vehicle) {
 		int parkingSpot = Garage.getVehicle(vehicle.getLicensePlate()).getParkingSpot();
 		Space vehicleSpace = Garage.getSpace(parkingSpot);
 		long hours = Duration.between(vehicleSpace.getTimeDateParked(), TimeControl.getCurrentTime()).toHours();
-		this.chargedAndPaid = hours * vehicle.getVehicleType().getHourlyRate();
-		//TODO Add early bird pricing
+		return hours * vehicle.getVehicleType().getHourlyRate();
 	}
 	public String toString() {
 		return super.toString() + ", Charged and Paid: $" + chargedAndPaid; 
