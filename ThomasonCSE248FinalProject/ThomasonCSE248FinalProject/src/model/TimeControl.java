@@ -79,4 +79,13 @@ static class Time implements Runnable{
 	public static void stopTime() {
 		Time.stop();
 	}
+	
+	public static void startTime(long multiplier) {
+		if (multiplier != 1) {
+			TimeControl.createTimeThread(multiplier);
+		}
+		else {
+			TimeControl.createTimeThread(1);
+		}
+	}
 }
