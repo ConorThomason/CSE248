@@ -17,10 +17,14 @@ import java.util.TreeMap;
 
 public class EmployeeManagement {
 	
-	private TreeMap<String, Employee> tree;
+	private static TreeMap<String, Employee> tree;
+	private static EmployeeManagement _employees = new EmployeeManagement();
 	
-	public EmployeeManagement() {
+	public EmployeeManagement() {}
+	
+	public static EmployeeManagement createEmployeeManagement() {
 		tree = new TreeMap<String, Employee>();
+		return _employees;
 	}
 	/**
 	 * 

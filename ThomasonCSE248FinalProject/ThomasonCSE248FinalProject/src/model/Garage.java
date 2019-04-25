@@ -6,7 +6,6 @@ import java.util.HashMap;
 public class Garage {
 	
 	private static HashMap<String, Vehicle> vehicles;
-	private static EmployeeManagement employees;
 	private static ArrayList<Space> spaces;
 	private static int carSpaces;
 	private static int currentCars = 0;

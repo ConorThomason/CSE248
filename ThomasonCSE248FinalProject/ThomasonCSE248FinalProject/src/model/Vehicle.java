@@ -31,6 +31,17 @@ public class Vehicle {
 		setLicensePlate(licensePlate);
 	}
 	
+	/**
+	 * 
+	 * @param vehicleType: Enum VehicleType is used, CAR, TRUCK, or MOTORCYCLE.
+	 * @param attendant: Passes whole attendant object instead of just a string, forces full name usage.
+	 * @param licensePlate: License plate of the vehicle. Currently doesn't differentiate on state.
+	 */
+	public Vehicle(VehicleType vehicleType, Attendant attendant, String licensePlate) {
+		this.vehicleType = vehicleType;
+		this.parkedBy = attendant.getFullName();
+		setLicensePlate(licensePlate);
+	}
 	
 	/**
 	 * Sets current index position of Vehicle in the Garage spots list.
@@ -94,7 +105,7 @@ public class Vehicle {
 	
 	@Override
 	public String toString() {
-		return ("Vehicle Type: " + vehicleType.toString() + "\t Parked By:" + parkedBy + "\t License Plate: " + licensePlate);
+		return ("Vehicle Type: " + vehicleType.toString() + "\t Parked By: " + parkedBy + "\t License Plate: " + licensePlate);
 	}
 	
 }
