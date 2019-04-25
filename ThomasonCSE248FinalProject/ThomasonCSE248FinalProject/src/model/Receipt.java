@@ -20,8 +20,12 @@ public class Receipt extends Ticket {
 		long hours = Duration.between(vehicleSpace.getTimeDateParked(), TimeControl.getCurrentTime()).toHours();
 		return hours * vehicle.getVehicleType().getHourlyRate();
 	}
+	
+	public double getChargedAndPaid() {
+		return chargedAndPaid;
+	}
 	public String toString() {
-		return super.toString() + ", Charged and Paid: $" + chargedAndPaid; 
+		return super.toString() + "\nCharged and Paid: $" + chargedAndPaid; 
 	}
 
 }
