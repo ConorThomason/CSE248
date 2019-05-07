@@ -31,8 +31,8 @@ public class EmployeeManagement {
 	 * @param employee - Employee object passed
 	 * @return boolean, if true added successfully. If false added unsuccessfully.
 	 */
-	public boolean addEmployee(Employee employee) {
-		if (this.findEmployee(employee.getUsername()))
+	public static boolean addEmployee(Employee employee) {
+		if (EmployeeManagement.findEmployee(employee.getUsername()))
 			return false;
 		tree.put(employee.getUsername(), employee);
 		return true;
@@ -43,19 +43,22 @@ public class EmployeeManagement {
 	 * @param username - key value to search for and remove
 	 * @return If removed successfully, return true. If false, removed unsuccessfully.
 	 */
-	public boolean removeEmployee(String username) {
+	public static boolean removeEmployee(String username) {
 		Employee removedEmployee = tree.remove(username);
 		if (removedEmployee == null) {
 			return false;
 		}
 		return true;
 	}
+	public static boolean removeEmployee(Attendant attendant){
+		return removeEmployee(attendant.getUsername());
+	}
 	/**
 	 * 
 	 * @param username - key value to search for
 	 * @return If the employee is found, returns true. If false, not found in the TreeMap.
 	 */
-	public boolean findEmployee(String username) {
+	public static boolean findEmployee(String username) {
 		if (tree.containsKey(username))
 			return true;
 		return false;
@@ -64,7 +67,7 @@ public class EmployeeManagement {
 	/**
 	 * Prints the employees by iterating through the entrySet of the tree.
 	 */
-	public void printEmployees() {
+	public static void printEmployees() {
 		for(Map.Entry<String, Employee> entry: tree.entrySet()) {
 			System.out.println(tree.get(entry.getKey()));
 		}
