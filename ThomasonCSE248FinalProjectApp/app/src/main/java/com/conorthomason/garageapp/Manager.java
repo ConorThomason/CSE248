@@ -1,6 +1,8 @@
 package com.conorthomason.garageapp;
 
-public class Manager extends Employee {
+import java.io.Serializable;
+
+public class Manager extends Employee implements Serializable {
     public Manager(String username, String password, String firstName, String lastName) {
         super(username, password, firstName, lastName);
         EmployeeManagement.addEmployee(this);

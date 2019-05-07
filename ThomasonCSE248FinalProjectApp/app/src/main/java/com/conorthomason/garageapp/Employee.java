@@ -1,5 +1,7 @@
 package com.conorthomason.garageapp;
 
+import java.io.Serializable;
+
 /**
  * The Employee class is superclass for both the Manager and Attendant classes.
  * Any password/username restrictions are handled by the EmployeeManagement class.
@@ -12,7 +14,7 @@ package com.conorthomason.garageapp;
  *
  */
 
-public class Employee {
+public class Employee implements Serializable {
 	private String username;
 	private String password;
 	private String firstName;
