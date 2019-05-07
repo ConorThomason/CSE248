@@ -17,11 +17,14 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         android:layout_width="76dp"
         android:layout_height="79dp"
         android:contentDescription="User image (TODO?)"
         tools:srcCompat="@tools:sample/avatars" />
 =======
+=======
+>>>>>>> parent of a3e3c1d... Begun work on settings activity
 =======
 >>>>>>> parent of a3e3c1d... Begun work on settings activity
 =======
@@ -33,6 +36,9 @@
         app:srcCompat="@mipmap/ic_launcher_round" />
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of a3e3c1d... Begun work on settings activity
+=======
 >>>>>>> parent of a3e3c1d... Begun work on settings activity
 =======
 >>>>>>> parent of a3e3c1d... Begun work on settings activity
