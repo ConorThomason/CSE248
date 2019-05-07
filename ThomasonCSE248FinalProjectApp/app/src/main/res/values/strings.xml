@@ -9,4 +9,6 @@
     <string name="employee_management">Employee Management</string>
     <string name="vehicle_search">Vehicle Search</string>
     <string name="spaces">Spaces</string>
+    <string name="name_string">Name: </string>
+    <string name="username_string">Username: </string>
 </resources>
