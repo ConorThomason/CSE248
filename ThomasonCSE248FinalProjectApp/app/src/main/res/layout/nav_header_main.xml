@@ -17,6 +17,7 @@
         android:id="@+id/imageView"
         android:layout_width="76dp"
         android:layout_height="79dp"
+        android:contentDescription="User image (TODO?)"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
