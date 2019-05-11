@@ -16,6 +16,37 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    public void signInButtonAction(){
+        toggleButtonStatus();
+    }
+
+    public void signOutButtonAction(){
+        toggleButtonStatus();
+    }
+
+    public void toggleButtonStatus(){
+        toggleVisibility(R.id.sign_in_button);
+        toggleVisibility(R.id.sign_up_button);
+        toggleVisibility(R.id.sign_out_button);
+        toggleGroupEnable(R.id.app_features_group);
+    }
+
+    public void toggleVisibility(int buttonId){
+        if (findViewById(buttonId).getVisibility() == View.INVISIBLE || findViewById(buttonId).getVisibility() == View.GONE){
+            findViewById(buttonId).setVisibility(View.VISIBLE);
+        }
+        else{
+            findViewById(buttonId).setVisibility(View.INVISIBLE);
+        }
+    }
+
+    public void toggleGroupEnable(int groupId){
+        if (findViewById(groupId).isEnabled() == false){
+            findViewById(groupId).setEnabled(true);
+        } else {
+            findViewById(groupId).setEnabled(false);
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,9 +111,12 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-//        if (id == R.id.nav_camera) {
-//            // Handle the camera action
-//        }
+        if (id == R.id.sign_in_button) {
+            signInButtonAction();
+        }
+        else if (id == R.id.sign_out_button){
+            signOutButtonAction();
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
