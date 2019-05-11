@@ -12,41 +12,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    public void signInButtonAction(){
-        toggleButtonStatus();
+    public void signInButtonAction(Menu navMenu){
+        navMenu.findItem(R.id.sign_up_button).setVisible(false);
+        navMenu.findItem(R.id.sign_out_button).setVisible(true);
+        navMenu.findItem(R.id.sign_in_button).setVisible(false);
     }
 
-    public void signOutButtonAction(){
-        toggleButtonStatus();
+    public void signOutButtonAction(Menu navMenu){
+        navMenu.findItem(R.id.sign_up_button).setVisible(true);
+        navMenu.findItem(R.id.sign_out_button).setVisible(false);
+        navMenu.findItem(R.id.sign_in_button).setVisible(true);
     }
 
-    public void toggleButtonStatus(){
-        toggleVisibility(R.id.sign_in_button);
-        toggleVisibility(R.id.sign_up_button);
-        toggleVisibility(R.id.sign_out_button);
-        toggleGroupEnable(R.id.app_features_group);
-    }
-
-    public void toggleVisibility(int buttonId){
-        if (findViewById(buttonId).getVisibility() == View.INVISIBLE || findViewById(buttonId).getVisibility() == View.GONE){
-            findViewById(buttonId).setVisibility(View.VISIBLE);
-        }
-        else{
-            findViewById(buttonId).setVisibility(View.INVISIBLE);
-        }
-    }
-
-    public void toggleGroupEnable(int groupId){
-        if (findViewById(groupId).isEnabled() == false){
-            findViewById(groupId).setEnabled(true);
-        } else {
-            findViewById(groupId).setEnabled(false);
-        }
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +53,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
     }
 
     @Override
@@ -110,14 +93,16 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        Menu navMenu = navigationView.getMenu();
         if (id == R.id.sign_in_button) {
-            signInButtonAction();
+            signInButtonAction(navMenu);
         }
         else if (id == R.id.sign_out_button){
-            signOutButtonAction();
+            signOutButtonAction(navMenu);
         }
-
+        else if (id == R.id.sign_up_button){
+        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
