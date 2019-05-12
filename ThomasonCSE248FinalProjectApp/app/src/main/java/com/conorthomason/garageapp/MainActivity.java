@@ -1,5 +1,6 @@
 package com.conorthomason.garageapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -29,8 +30,14 @@ public class MainActivity extends AppCompatActivity
         navMenu.findItem(R.id.sign_in_button).setVisible(true);
     }
 
+    public void signUpButtonAction(Menu navMenu){
+        Intent intent = new Intent(this, SignUpActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        EmployeeManagement.createEmployeeManagement();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -102,6 +109,7 @@ public class MainActivity extends AppCompatActivity
             signOutButtonAction(navMenu);
         }
         else if (id == R.id.sign_up_button){
+            signUpButtonAction(navMenu);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

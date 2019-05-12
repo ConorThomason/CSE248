@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".SignUpActivity"
+    tools:showIn="@layout/activity_sign_up">
+
+    <EditText
+        android:id="@+id/usernameEntry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="152dp"
+        android:ems="10"
+        android:hint="@string/prompt_username"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/passwordEntry"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/passwordEntry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/prompt_password"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/firstNameEntry"
+        app:layout_constraintTop_toBottomOf="@+id/usernameEntry" />
+
+    <EditText
+        android:id="@+id/firstNameEntry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:ems="10"
+        android:hint="@string/prompt_first_name"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/lastNameEntry"
+        app:layout_constraintTop_toBottomOf="@+id/passwordEntry" />
+
+    <EditText
+        android:id="@+id/lastNameEntry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="96dp"
+        android:ems="10"
+        android:hint="@string/prompt_last_name"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/firstNameEntry" />
+
+    <Button
+        android:id="@+id/confirmSignUpButton"
+        android:layout_width="115dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="148dp"
+        android:layout_marginBottom="152dp"
+        android:onClick="confirmSignUpButton"
+        android:text="@string/confirm_sign_up"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lastNameEntry"
+        app:layout_constraintVertical_bias="0.462" />
+
+</android.support.constraint.ConstraintLayout>
