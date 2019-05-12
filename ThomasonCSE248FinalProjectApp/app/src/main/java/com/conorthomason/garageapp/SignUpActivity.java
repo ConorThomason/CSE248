@@ -53,11 +53,12 @@ public class SignUpActivity extends AppCompatActivity {
                         //nop
                     }
                 });
-                builder.setMessage("Employee added successfully");
+                builder.setMessage("Employee " + username + " added successfully");
                 builder.setCancelable(true);
                 builder.show();
             }
         }
+
     }
 
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Garage App</string>
+    <string name="app_name">Garage Management</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -24,7 +24,7 @@
     <string name="login_title">Garage Management</string>
     <string name="action_sign_up">Sign Up</string>
     <string name="sign_out">Sign Out</string>
-    <string name="title_activity_sign_up">SignUpActivity</string>
+    <string name="title_activity_sign_up">Sign Up</string>
     <string name="prompt_first_name">First Name</string>
     <string name="prompt_last_name">Last Name</string>
     <string name="confirm_sign_up">Confirm</string>
