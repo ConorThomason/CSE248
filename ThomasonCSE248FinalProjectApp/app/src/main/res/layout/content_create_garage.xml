@@ -87,7 +87,7 @@
         app:layout_constraintTop_toBottomOf="@+id/allowedPaymentTypesLabel" />
 
     <EditText
-        android:id="@+id/editText8"
+        android:id="@+id/truckRateEntry"
         android:layout_width="190dp"
         android:layout_height="45dp"
         android:layout_marginTop="4dp"
@@ -96,10 +96,10 @@
         android:hint="@string/truck_costs"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText7" />
+        app:layout_constraintTop_toBottomOf="@+id/motorcycleRateEntry" />
 
     <EditText
-        android:id="@+id/editText7"
+        android:id="@+id/motorcycleRateEntry"
         android:layout_width="190dp"
         android:layout_height="45dp"
         android:layout_marginTop="12dp"
@@ -108,10 +108,10 @@
         android:hint="@string/motorcycle_costs"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText6" />
+        app:layout_constraintTop_toBottomOf="@+id/carRateEntry" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/motorcycleSpacesEntry"
         android:layout_width="174dp"
         android:layout_height="45dp"
         android:layout_marginStart="8dp"
@@ -120,10 +120,10 @@
         android:hint="@string/motorcycle_spaces"
         android:inputType="number"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3" />
+        app:layout_constraintTop_toBottomOf="@+id/carSpacesEntry" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/truckSpacesEntry"
         android:layout_width="174dp"
         android:layout_height="45dp"
         android:layout_marginStart="8dp"
@@ -132,10 +132,10 @@
         android:hint="@string/truck_spaces"
         android:inputType="number"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
+        app:layout_constraintTop_toBottomOf="@+id/motorcycleSpacesEntry" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/carSpacesEntry"
         android:layout_width="174dp"
         android:layout_height="45dp"
         android:layout_marginStart="8dp"
@@ -147,7 +147,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText6"
+        android:id="@+id/carRateEntry"
         android:layout_width="190dp"
         android:layout_height="45dp"
         android:layout_marginTop="36dp"
@@ -167,7 +167,7 @@
         android:text="@string/allowed_payment_types"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText5" />
+        app:layout_constraintTop_toBottomOf="@+id/truckSpacesEntry" />
 
     <TextView
         android:id="@+id/allowedPaymentTypesLabel2"
