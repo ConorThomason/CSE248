@@ -1,4 +1,4 @@
-package com.conorthomason.garageapp;
+package controller;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,21 +13,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
+
+import com.conorthomason.garageapp.EmployeeManagement;
+import com.conorthomason.garageapp.R;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    public void signInButtonAction(Menu navMenu){
-        navMenu.findItem(R.id.sign_up_button).setVisible(false);
-        navMenu.findItem(R.id.sign_out_button).setVisible(true);
-        navMenu.findItem(R.id.sign_in_button).setVisible(false);
-    }
-
     public void signOutButtonAction(Menu navMenu){
         navMenu.findItem(R.id.sign_up_button).setVisible(true);
         navMenu.findItem(R.id.sign_out_button).setVisible(false);
-        navMenu.findItem(R.id.sign_in_button).setVisible(true);
     }
 
     public void signUpButtonAction(Menu navMenu){
@@ -102,10 +97,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         Menu navMenu = navigationView.getMenu();
-        if (id == R.id.sign_in_button) {
-            signInButtonAction(navMenu);
-        }
-        else if (id == R.id.sign_out_button){
+        if (id == R.id.sign_out_button){
             signOutButtonAction(navMenu);
         }
         else if (id == R.id.sign_up_button){

@@ -22,11 +22,38 @@
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="login_title">Garage Management</string>
-    <string name="action_sign_up">Sign Up</string>
+    <string name="action_sign_up">Register User</string>
     <string name="sign_out">Sign Out</string>
     <string name="title_activity_sign_up">Sign Up</string>
     <string name="prompt_first_name">First Name</string>
     <string name="prompt_last_name">Last Name</string>
     <string name="confirm_sign_up">Confirm</string>
+    <string name="manager_check">Manager</string>
+    <string name="title_activity_sign_in">SignInActivity</string>
+    <string name="confirm_sign_in">Sign In</string>
+    <string name="create_new_garage">Create Garage</string>
+    <string name="title_activity_create_garage">CreateGarage</string>
+
+    <!-- Strings related to garage creation -->
+    <string name="car_spaces">Car Spaces</string>
+    <string name="motorcycle_spaces">Motorcycle Spaces</string>
+    <string name="truck_spaces">Truck Spaces</string>
+    <string name="allowed_payment_types">Allowed Payment Types</string>
+    <string name="car_costs">Car Rate ($/hr)</string>
+    <string name="motorcycle_costs">Motorcycle Rate ($/hr)</string>
+    <string name="truck_costs">Truck Rate ($/hr)</string>
+    <string name="vehicle_details">Vehicle Details</string>
+    <string name="car_payment">Car</string>
+    <string name="motorcycle_payment">Motorcycle</string>
+    <string name="truck_payment">Truck</string>
+    <string name="cash_payment">Cash</string>
+    <string name="check_payment">Check</string>
+    <string name="debit_payment">Debit</string>
+    <string name="credit_payment">Credit</string>
+    <string name="manager_username">Manager Username</string>
+    <string name="manager_password">Manager Password</string>
+    <string name="manager_first_name">Manager First Name</string>
+    <string name="manager_last_name">Manager Last Name</string>
+    <string name="manager_details">Manager Details</string>
 
 </resources>

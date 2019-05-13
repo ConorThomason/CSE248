@@ -90,7 +90,11 @@ public class Employee implements Serializable {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
+
+	/**
+	 *
+	 * @return String fullName constructed from the stored first and last names
+	 */
 	public String getFullName() {
 		return getFirstName() + " " + getLastName();
 	}

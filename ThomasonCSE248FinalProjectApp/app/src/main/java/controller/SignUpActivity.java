@@ -1,4 +1,4 @@
-package com.conorthomason.garageapp;
+package controller;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -6,7 +6,14 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
+
+import com.conorthomason.garageapp.Attendant;
+import com.conorthomason.garageapp.Employee;
+import com.conorthomason.garageapp.EmployeeManagement;
+import com.conorthomason.garageapp.Manager;
+import com.conorthomason.garageapp.R;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -44,8 +51,10 @@ public class SignUpActivity extends AppCompatActivity {
             builder.show();
         }
         else{
-            Employee employee = new Employee(username, password, firstName, lastName);
-            if (EmployeeManagement.addEmployee(employee)){
+            CheckBox managerBox = (CheckBox) findViewById(R.id.managerCheckBox);
+            Employee employee = (managerBox.isChecked()) ? new Manager(username, password, firstName, lastName) : new Attendant(username, password, firstName, lastName);
+            EmployeeManagement.addEmployee(employee);
+            if (EmployeeManagement.findEmployee(employee.getUsername())){
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
@@ -53,7 +62,19 @@ public class SignUpActivity extends AppCompatActivity {
                         //nop
                     }
                 });
-                builder.setMessage("Employee " + username + " added successfully");
+                builder.setMessage(username + " added successfully");
+                builder.setCancelable(true);
+                builder.show();
+            }
+            else{
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //nop
+                    }
+                });
+                builder.setMessage("Employee registration failed");
                 builder.setCancelable(true);
                 builder.show();
             }

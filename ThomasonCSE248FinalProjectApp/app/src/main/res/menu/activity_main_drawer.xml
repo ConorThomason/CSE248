@@ -24,14 +24,10 @@
         android:id="@+id/user_control_group"
         android:visible="true">
         <item
-            android:id="@+id/sign_in_button"
-            android:enabled="true"
-            android:icon="@drawable/ic_menu_send"
-            android:title="@string/action_sign_in_short" />
-        <item
             android:id="@+id/sign_up_button"
             android:icon="@android:drawable/ic_menu_add"
-            android:title="@string/action_sign_up" />
+            android:title="@string/action_sign_up"
+            android:visible="false" />
         <item
             android:id="@+id/sign_out_button"
             android:icon="@android:drawable/ic_menu_close_clear_cancel"
