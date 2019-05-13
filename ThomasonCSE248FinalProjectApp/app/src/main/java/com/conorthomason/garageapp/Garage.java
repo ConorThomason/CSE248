@@ -4,8 +4,40 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Garage {
-	
-	private static HashMap<String, Vehicle> vehicles;
+
+    public static void setVehicles(HashMap<String, Vehicle> vehicles) {
+        Garage.vehicles = vehicles;
+    }
+
+    public static void setSpaces(ArrayList<Space> spaces) {
+        Garage.spaces = spaces;
+    }
+
+    public static void setCarSpaces(int carSpaces) {
+        Garage.carSpaces = carSpaces;
+    }
+
+    public static void setCurrentCars(int currentCars) {
+        Garage.currentCars = currentCars;
+    }
+
+    public static void setTruckSpaces(int truckSpaces) {
+        Garage.truckSpaces = truckSpaces;
+    }
+
+    public static void setCurrentTrucks(int currentTrucks) {
+        Garage.currentTrucks = currentTrucks;
+    }
+
+    public static void setMotorcycleSpaces(int motorcycleSpaces) {
+        Garage.motorcycleSpaces = motorcycleSpaces;
+    }
+
+    public static void setCurrentMotorcycles(int currentMotorcycles) {
+        Garage.currentMotorcycles = currentMotorcycles;
+    }
+
+    private static HashMap<String, Vehicle> vehicles;
 	private static ArrayList<Space> spaces;
 	private static int carSpaces;
 	private static int currentCars = 0;
@@ -16,7 +48,7 @@ public class Garage {
 	private static Garage _garage = new Garage();
 
 	private Garage() {}
-	
+
 	public static Garage createGarage(ArrayList<PaymentScheme> carPaymentSchemes, ArrayList<PaymentScheme> motorcyclePaymentSchemes, ArrayList<PaymentScheme> truckPaymentSchemes, 
 			int carSpaces, int truckSpaces, int motorcycleSpaces) {
 		Garage.carSpaces = carSpaces;
@@ -29,7 +61,30 @@ public class Garage {
 		vehicles = new HashMap<String, Vehicle>((carSpaces + truckSpaces + motorcycleSpaces) * 2);
 		return _garage;
 	}
-	
+
+	public static int getCarSpaces(){
+	    return carSpaces;
+    }
+    public static int getCurrentCars(){
+	    return currentCars;
+    }
+    public static int getTruckSpaces(){
+	    return truckSpaces;
+    }
+    public static int getCurrentTrucks(){
+	    return currentTrucks;
+    }
+    public static int getMotorcycleSpaces(){
+	    return motorcycleSpaces;
+    }
+    public static int getCurrentMotorcycles(){
+	    return currentMotorcycles;
+    }
+
+	public static ArrayList<Space> getSpaces(){
+	    return spaces;
+    }
+
 	public static void spaceSetup(VehicleType vehicleType, int numberOfSpaces, ArrayList<PaymentScheme> paymentScheme) {
 		for (int i = 0; i < numberOfSpaces; i++) {
 			Space newSpace = new Space(vehicleType, paymentScheme);

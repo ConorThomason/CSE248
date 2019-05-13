@@ -13,15 +13,17 @@ import com.conorthomason.garageapp.Employee;
 import com.conorthomason.garageapp.EmployeeManagement;
 import com.conorthomason.garageapp.Manager;
 import com.conorthomason.garageapp.R;
+import com.conorthomason.garageapp.SaveState;
+
+import java.io.File;
 
 public class SignInActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (!EmployeeManagement.exists()) {
+        SaveState state = new SaveState();
+        if (!state.loadData(getFilesDir())) {
             EmployeeManagement.createEmployeeManagement();
-            EmployeeManagement.addEmployee(new Manager("u", "p", "testFirst", "testLast"));
-            EmployeeManagement.addEmployee(new Attendant("a", "p", "attendantFirst", "attendantLast"));
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);

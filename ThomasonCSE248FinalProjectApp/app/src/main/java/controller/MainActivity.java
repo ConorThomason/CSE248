@@ -18,6 +18,7 @@ import android.widget.Button;
 import com.conorthomason.garageapp.EmployeeManagement;
 import com.conorthomason.garageapp.Manager;
 import com.conorthomason.garageapp.R;
+import com.conorthomason.garageapp.SaveState;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -32,6 +33,11 @@ public class MainActivity extends AppCompatActivity
     public void signUpButtonAction(Menu navMenu){
         Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
+    }
+
+    protected void onDestroy(Bundle savedInstanceState){
+        SaveState state = new SaveState();
+        state.saveData();
     }
 
     @Override

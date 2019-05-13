@@ -25,10 +25,13 @@ import java.util.TreeMap;
  *
  */
 
-public class EmployeeManagement extends Activity implements Serializable {
+public class EmployeeManagement {
 	
 	private static TreeMap<String, Employee> tree;
-	private static boolean exists = false;
+
+
+
+    private static boolean exists = false;
 	private static EmployeeManagement _employees = new EmployeeManagement();
 	private static Employee activeUser = null;
 	
@@ -39,45 +42,23 @@ public class EmployeeManagement extends Activity implements Serializable {
 		exists = true;
 		return _employees;
 	}
-	/**
-	 * 
-	 * @param Employee - Employee object passed
-	 * @return boolean, if true added successfully. If false added unsuccessfully.
-	 */
 
+	public static TreeMap<String, Employee> getTree(){
+	    return tree;
+    }
 	public static boolean exists(){
 	    return exists;
     }
-    private void loadEmployees(){
-	    try{
-	        File internalStorageDir = getFilesDir();
-	        File users = new File (internalStorageDir, "users.bin");
-            FileInputStream fis = new FileInputStream(users);
-            ObjectInputStream objectIn = new ObjectInputStream(fis);
-            try {
-                EmployeeManagement.tree = (TreeMap<String, Employee>)objectIn.readObject();
-            } catch (ClassNotFoundException f){
-                f.printStackTrace();
-            }
 
-        } catch (IOException e){
-            //nop
-
-        }
-    }
-    private void saveEmployees(){
-        try {
-            File internalStorageDir = getFilesDir();
-            File users = new File(internalStorageDir, "users.bin");
-            FileOutputStream fos = new FileOutputStream(users);
-            ObjectOutputStream objectOut = new ObjectOutputStream(fos);
-            objectOut.writeObject(EmployeeManagement.tree);
-            objectOut.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static void setTree(TreeMap<String, Employee> tree) {
+        EmployeeManagement.tree = tree;
     }
 
+    /**
+     *
+     * @param Employee - Employee object passed
+     * @return boolean, if true added successfully. If false added unsuccessfully.
+     */
 	public static boolean addEmployee(Employee employee) {
 		if (EmployeeManagement.findEmployee(employee.getUsername()))
 			return false;
