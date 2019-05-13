@@ -56,4 +56,7 @@
     <string name="manager_last_name">Manager Last Name</string>
     <string name="manager_details">Manager Details</string>
 
+    <!-- Strings related to garage main display -->
+    <string name="garage_empty">No current vehicles to display</string>
+
 </resources>

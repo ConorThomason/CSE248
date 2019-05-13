@@ -6,7 +6,7 @@
     <group
         android:id="@+id/app_features_group"
         android:checkableBehavior="single"
-        android:enabled="false">
+        android:enabled="true">
         <item
             android:id="@+id/vehicle_search"
             android:icon="@android:drawable/ic_menu_search"
@@ -16,22 +16,21 @@
             android:icon="@android:drawable/ic_menu_directions"
             android:title="@string/spaces" />
         <item
+            android:id="@+id/sign_out_button"
+            android:icon="@android:drawable/ic_menu_close_clear_cancel"
+            android:title="@string/sign_out"
+            android:visible="true" />
+    </group>
+    <group android:id="@+id/user_control_group">
+        <item
             android:id="@+id/employee_management"
             android:icon="@android:drawable/ic_menu_myplaces"
-            android:title="@string/employee_management" />
-    </group>
-    <group
-        android:id="@+id/user_control_group"
-        android:visible="true">
+            android:title="@string/employee_management"
+            android:visible="false" />
         <item
             android:id="@+id/sign_up_button"
             android:icon="@android:drawable/ic_menu_add"
             android:title="@string/action_sign_up"
-            android:visible="false" />
-        <item
-            android:id="@+id/sign_out_button"
-            android:icon="@android:drawable/ic_menu_close_clear_cancel"
-            android:title="@string/sign_out"
             android:visible="false" />
     </group>
 

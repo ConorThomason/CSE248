@@ -13,16 +13,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 import com.conorthomason.garageapp.EmployeeManagement;
+import com.conorthomason.garageapp.Manager;
 import com.conorthomason.garageapp.R;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public void signOutButtonAction(Menu navMenu){
-        navMenu.findItem(R.id.sign_up_button).setVisible(true);
-        navMenu.findItem(R.id.sign_out_button).setVisible(false);
+        Intent intent = new Intent(this, SignInActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 
     public void signUpButtonAction(Menu navMenu){
@@ -32,7 +36,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        EmployeeManagement.createEmployeeManagement();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -55,6 +58,15 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        Menu navMenu = navigationView.getMenu();
+        if (EmployeeManagement.getActiveEmployee() instanceof Manager){
+            navMenu.findItem(R.id.sign_up_button).setVisible(true);
+            navMenu.findItem(R.id.employee_management).setVisible(true);
+        }
+        else{
+            navMenu.findItem(R.id.sign_up_button).setVisible(false);
+            navMenu.findItem(R.id.employee_management).setVisible(false);
+        }
 
     }
 

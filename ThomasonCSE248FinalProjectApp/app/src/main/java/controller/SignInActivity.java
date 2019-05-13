@@ -8,16 +8,21 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 
+import com.conorthomason.garageapp.Attendant;
 import com.conorthomason.garageapp.Employee;
 import com.conorthomason.garageapp.EmployeeManagement;
+import com.conorthomason.garageapp.Manager;
 import com.conorthomason.garageapp.R;
 
 public class SignInActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        EmployeeManagement.createEmployeeManagement();
-
+        if (!EmployeeManagement.exists()) {
+            EmployeeManagement.createEmployeeManagement();
+            EmployeeManagement.addEmployee(new Manager("u", "p", "testFirst", "testLast"));
+            EmployeeManagement.addEmployee(new Attendant("a", "p", "attendantFirst", "attendantLast"));
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -47,7 +52,9 @@ public class SignInActivity extends AppCompatActivity {
             else {
                 EmployeeManagement.setActiveEmployee(foundEmployee);
                 Intent intent = new Intent(this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                finish();
             }
         }
 

@@ -28,6 +28,7 @@ import java.util.TreeMap;
 public class EmployeeManagement extends Activity implements Serializable {
 	
 	private static TreeMap<String, Employee> tree;
+	private static boolean exists = false;
 	private static EmployeeManagement _employees = new EmployeeManagement();
 	private static Employee activeUser = null;
 	
@@ -35,6 +36,7 @@ public class EmployeeManagement extends Activity implements Serializable {
 	
 	public static EmployeeManagement createEmployeeManagement() {
 		tree = new TreeMap<String, Employee>();
+		exists = true;
 		return _employees;
 	}
 	/**
@@ -44,7 +46,7 @@ public class EmployeeManagement extends Activity implements Serializable {
 	 */
 
 	public static boolean exists(){
-	    return tree == null;
+	    return exists;
     }
     private void loadEmployees(){
 	    try{

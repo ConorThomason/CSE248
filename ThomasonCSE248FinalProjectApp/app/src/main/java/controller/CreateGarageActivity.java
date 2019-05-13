@@ -79,6 +79,7 @@ public class CreateGarageActivity extends AppCompatActivity {
             Garage.createGarage(assertPaymentSchemes(carTypes), assertPaymentSchemes(motorcycleTypes), assertPaymentSchemes(truckTypes),
                     carSpaces, motorcycleSpaces, truckSpaces);
             EmployeeManagement.addEmployee(new Manager(managerUsername, managerPassword, managerFirstName, managerLastName));
+            EmployeeManagement.setActiveEmployee(EmployeeManagement.getEmployee(managerUsername));
 
             Intent intent = new Intent(this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
