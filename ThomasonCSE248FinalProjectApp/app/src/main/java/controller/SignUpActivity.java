@@ -32,9 +32,9 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void confirmSignUpButton(View v){
         TextView usernameEntry = (TextView) findViewById(R.id.usernameEntry);
-        TextView passwordEntry = (TextView) findViewById(R.id.usernameEntry);
-        TextView firstNameEntry = (TextView) findViewById(R.id.usernameEntry);
-        TextView lastNameEntry = (TextView) findViewById(R.id.usernameEntry);
+        TextView passwordEntry = (TextView) findViewById(R.id.passwordEntry);
+        TextView firstNameEntry = (TextView) findViewById(R.id.firstNameEntry);
+        TextView lastNameEntry = (TextView) findViewById(R.id.lastNameEntry);
 
         String username = usernameEntry.getText().toString();
         String password = passwordEntry.getText().toString();
