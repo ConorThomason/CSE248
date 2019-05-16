@@ -12,13 +12,16 @@ import android.widget.TextView;
 import com.conorthomason.garageapp.Attendant;
 import com.conorthomason.garageapp.Employee;
 import com.conorthomason.garageapp.EmployeeManagement;
+import com.conorthomason.garageapp.EmployeeManagementService;
 import com.conorthomason.garageapp.Manager;
 import com.conorthomason.garageapp.R;
 
 public class SignUpActivity extends AppCompatActivity {
 
+    private EmployeeManagement employees = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        employees = ((EmployeeManagementService)getApplication()).getSingleton();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -38,7 +41,7 @@ public class SignUpActivity extends AppCompatActivity {
         String firstName = firstNameEntry.getText().toString();
         String lastName = lastNameEntry.getText().toString();
 
-        if (EmployeeManagement.findEmployee(username)){
+        if (employees.findEmployee(username)){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
@@ -53,8 +56,8 @@ public class SignUpActivity extends AppCompatActivity {
         else{
             CheckBox managerBox = (CheckBox) findViewById(R.id.managerCheckBox);
             Employee employee = (managerBox.isChecked()) ? new Manager(username, password, firstName, lastName) : new Attendant(username, password, firstName, lastName);
-            EmployeeManagement.addEmployee(employee);
-            if (EmployeeManagement.findEmployee(employee.getUsername())){
+            employees.addEmployee(employee);
+            if (employees.findEmployee(employee.getUsername())){
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override

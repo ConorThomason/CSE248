@@ -13,17 +13,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 
 import com.conorthomason.garageapp.EmployeeManagement;
+import com.conorthomason.garageapp.EmployeeManagementService;
 import com.conorthomason.garageapp.Manager;
 import com.conorthomason.garageapp.R;
-import com.conorthomason.garageapp.SaveState;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private EmployeeManagement employees = null;
+
     public void signOutButtonAction(Menu navMenu){
+        employees = ((EmployeeManagementService)getApplication()).getSingleton();
+        ((EmployeeManagementService) getApplication()).saveData();
         Intent intent = new Intent(this, SignInActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
@@ -36,8 +39,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     protected void onDestroy(Bundle savedInstanceState){
-        SaveState state = new SaveState();
-        state.saveData();
+        ((EmployeeManagementService)getApplication()).saveData();
     }
 
     @Override
@@ -65,7 +67,8 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         Menu navMenu = navigationView.getMenu();
-        if (EmployeeManagement.getActiveEmployee() instanceof Manager){
+        employees = ((EmployeeManagementService)getApplication()).getSingleton();
+        if (employees.getActiveEmployee() instanceof Manager){
             navMenu.findItem(R.id.sign_up_button).setVisible(true);
             navMenu.findItem(R.id.employee_management).setVisible(true);
         }

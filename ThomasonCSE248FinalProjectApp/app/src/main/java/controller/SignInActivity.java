@@ -8,27 +8,23 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 
-import com.conorthomason.garageapp.Attendant;
 import com.conorthomason.garageapp.Employee;
 import com.conorthomason.garageapp.EmployeeManagement;
-import com.conorthomason.garageapp.Manager;
+import com.conorthomason.garageapp.EmployeeManagementService;
 import com.conorthomason.garageapp.R;
-import com.conorthomason.garageapp.SaveState;
-
-import java.io.File;
 
 public class SignInActivity extends AppCompatActivity {
 
+    private EmployeeManagement employees = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SaveState state = new SaveState();
-        if (!state.loadData(getFilesDir())) {
-            EmployeeManagement.createEmployeeManagement();
-        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ((EmployeeManagementService)getApplication()).loadData();
+        employees = ((EmployeeManagementService)getApplicationContext()).getSingleton();
+        System.out.println("Employee Management Created");
     }
 
     public void signInButton(View v){
@@ -39,12 +35,13 @@ public class SignInActivity extends AppCompatActivity {
         String password = passwordField.getText().toString();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        if (!EmployeeManagement.findEmployee(username)) {
+        if (!employees.findEmployee(username)) {
             builder.setTitle("Login error");
+            builder.setMessage("User not found. Please try again.");
             builder.setPositiveButton("OK", null);
             builder.show();
         } else {
-            Employee foundEmployee = EmployeeManagement.getEmployee(username);
+            Employee foundEmployee = employees.getEmployee(username);
             if (!foundEmployee.getPassword().equals(password)){
                 builder.setTitle("Login error");
                 builder.setMessage("Password is incorrect. Please try again.");
@@ -52,7 +49,7 @@ public class SignInActivity extends AppCompatActivity {
                 builder.show();
             }
             else {
-                EmployeeManagement.setActiveEmployee(foundEmployee);
+                employees.setActiveEmployee(foundEmployee);
                 Intent intent = new Intent(this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);

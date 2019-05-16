@@ -8,6 +8,62 @@
     tools:context="controller.CreateGarageActivity"
     tools:showIn="@layout/activity_create_garage">
 
+    <EditText
+        android:id="@+id/motorcycleEarlyBirdEntry"
+        android:layout_width="115dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="45dp"
+        android:ems="10"
+        android:hint="@string/early_bird"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="@+id/motorcycleRateEntry"
+        app:layout_constraintTop_toTopOf="@+id/carEarlyBirdEntry" />
+
+    <EditText
+        android:id="@+id/carEarlyBirdEntry"
+        android:layout_width="115dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="36dp"
+        android:ems="10"
+        android:hint="@string/early_bird"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="@+id/carRateEntry"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/truckEarlyBirdEntry"
+        android:layout_width="115dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="45dp"
+        android:ems="10"
+        android:hint="@string/early_bird"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="@+id/truckRateEntry"
+        app:layout_constraintTop_toTopOf="@+id/motorcycleEarlyBirdEntry" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="140dp"
+        android:text="Truck"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="96dp"
+        android:text="Motorcycle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/managerDetailsLabel"
         android:layout_width="wrap_content"
@@ -88,57 +144,53 @@
 
     <EditText
         android:id="@+id/truckRateEntry"
-        android:layout_width="190dp"
+        android:layout_width="75dp"
         android:layout_height="45dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="88dp"
         android:ems="10"
-        android:hint="@string/truck_costs"
+        android:hint="@string/car_costs"
         android:inputType="numberDecimal"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/truckSpacesEntry"
         app:layout_constraintTop_toBottomOf="@+id/motorcycleRateEntry" />
 
     <EditText
         android:id="@+id/motorcycleRateEntry"
-        android:layout_width="190dp"
+        android:layout_width="75dp"
         android:layout_height="45dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="88dp"
         android:ems="10"
-        android:hint="@string/motorcycle_costs"
+        android:hint="@string/car_costs"
         android:inputType="numberDecimal"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/motorcycleSpacesEntry"
         app:layout_constraintTop_toBottomOf="@+id/carRateEntry" />
 
     <EditText
         android:id="@+id/motorcycleSpacesEntry"
-        android:layout_width="174dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="85dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="88dp"
         android:ems="10"
-        android:hint="@string/motorcycle_spaces"
+        android:hint="@string/car_spaces"
         android:inputType="number"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/carSpacesEntry" />
 
     <EditText
         android:id="@+id/truckSpacesEntry"
-        android:layout_width="174dp"
+        android:layout_width="85dp"
         android:layout_height="45dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginStart="88dp"
         android:ems="10"
-        android:hint="@string/truck_spaces"
+        android:hint="@string/car_spaces"
         android:inputType="number"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/motorcycleSpacesEntry" />
 
     <EditText
         android:id="@+id/carSpacesEntry"
-        android:layout_width="174dp"
+        android:layout_width="85dp"
         android:layout_height="45dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="88dp"
         android:layout_marginTop="36dp"
         android:ems="10"
         android:hint="@string/car_spaces"
@@ -148,29 +200,32 @@
 
     <EditText
         android:id="@+id/carRateEntry"
-        android:layout_width="190dp"
+        android:layout_width="75dp"
         android:layout_height="45dp"
+        android:layout_marginStart="3dp"
         android:layout_marginTop="36dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="200dp"
         android:ems="10"
         android:hint="@string/car_costs"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/carSpacesEntry"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/allowedPaymentTypesLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="180dp"
         android:text="@string/allowed_payment_types"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/truckSpacesEntry" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/allowedPaymentTypesLabel2"
+        android:id="@+id/vehicleDetailsLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -305,5 +360,15 @@
         android:text="@string/confirm_sign_up"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="48dp"
+        android:text="Car"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

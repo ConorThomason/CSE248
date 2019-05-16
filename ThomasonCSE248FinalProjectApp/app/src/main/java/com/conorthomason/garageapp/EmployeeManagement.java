@@ -1,6 +1,7 @@
 package com.conorthomason.garageapp;
 
 import android.app.Activity;
+import android.app.Application;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,60 +26,57 @@ import java.util.TreeMap;
  *
  */
 
-public class EmployeeManagement {
-	
-	private static TreeMap<String, Employee> tree;
+public class EmployeeManagement implements Serializable {
 
 
+	private TreeMap<String, Employee> tree;
+    private boolean exists = false;
+	private Employee activeUser = null;
 
-    private static boolean exists = false;
-	private static EmployeeManagement _employees = new EmployeeManagement();
-	private static Employee activeUser = null;
-	
+
 	public EmployeeManagement() {}
-	
-	public static EmployeeManagement createEmployeeManagement() {
+
+	public void createEmployeeManagement() {
 		tree = new TreeMap<String, Employee>();
 		exists = true;
-		return _employees;
 	}
 
-	public static TreeMap<String, Employee> getTree(){
+	public TreeMap<String, Employee> getTree(){
 	    return tree;
     }
-	public static boolean exists(){
+	public boolean exists(){
 	    return exists;
     }
 
-    public static void setTree(TreeMap<String, Employee> tree) {
-        EmployeeManagement.tree = tree;
+    public void setTree(TreeMap<String, Employee> tree) {
+        this.tree = tree;
     }
 
     /**
      *
-     * @param Employee - Employee object passed
+     * @param employee - Employee object passed
      * @return boolean, if true added successfully. If false added unsuccessfully.
      */
-	public static boolean addEmployee(Employee employee) {
-		if (EmployeeManagement.findEmployee(employee.getUsername()))
+	public boolean addEmployee(Employee employee) {
+		if (this.findEmployee(employee.getUsername()))
 			return false;
 		tree.put(employee.getUsername(), employee);
 		return true;
 	}
 
-	public static void setActiveEmployee(Employee employee){
+	public void setActiveEmployee(Employee employee){
 	    activeUser = employee;
     }
 
-    public static Employee getActiveEmployee(){
+    public Employee getActiveEmployee(){
 	    return activeUser;
     }
 
-	public static Employee getEmployee(Employee employee){
+	public Employee getEmployee(Employee employee){
 	    return getEmployee(employee.getUsername());
     }
 
-    public static Employee getEmployee(String username){
+    public Employee getEmployee(String username){
 	    return tree.get(username);
     }
 	/**
@@ -86,14 +84,14 @@ public class EmployeeManagement {
 	 * @param username - key value to search for and remove
 	 * @return If removed successfully, return true. If false, removed unsuccessfully.
 	 */
-	public static boolean removeEmployee(String username) {
+	public boolean removeEmployee(String username) {
 		Employee removedEmployee = tree.remove(username);
 		if (removedEmployee == null) {
 			return false;
 		}
 		return true;
 	}
-	public static boolean removeEmployee(Attendant attendant){
+	public boolean removeEmployee(Attendant attendant){
 		return removeEmployee(attendant.getUsername());
 	}
 	/**
@@ -101,7 +99,7 @@ public class EmployeeManagement {
 	 * @param username - key value to search for
 	 * @return If the employee is found, returns true. If false, not found in the TreeMap.
 	 */
-	public static boolean findEmployee(String username) {
+	public boolean findEmployee(String username) {
 		if (tree.containsKey(username))
 			return true;
 		return false;
@@ -110,7 +108,7 @@ public class EmployeeManagement {
 	/**
 	 * Prints the employees by iterating through the entrySet of the tree.
 	 */
-	public static void printEmployees() {
+	public void printEmployees() {
 		for(Map.Entry<String, Employee> entry: tree.entrySet()) {
 			System.out.println(tree.get(entry.getKey()));
 		}

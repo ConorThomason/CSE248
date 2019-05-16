@@ -12,17 +12,20 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.conorthomason.garageapp.EmployeeManagement;
+import com.conorthomason.garageapp.EmployeeManagementService;
 import com.conorthomason.garageapp.Garage;
 import com.conorthomason.garageapp.Manager;
 import com.conorthomason.garageapp.PaymentScheme;
 import com.conorthomason.garageapp.R;
+import com.conorthomason.garageapp.VehicleType;
 
 import java.util.ArrayList;
 
 public class CreateGarageActivity extends AppCompatActivity {
-
+    private EmployeeManagement employees = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        employees = ((EmployeeManagementService)getApplication()).getSingleton();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_garage);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -37,6 +40,10 @@ public class CreateGarageActivity extends AppCompatActivity {
             EditText carRateBox = (EditText) findViewById(R.id.carRateEntry);
             EditText motorcycleRateBox = (EditText) findViewById(R.id.motorcycleRateEntry);
             EditText truckRateBox = (EditText) findViewById(R.id.truckRateEntry);
+            EditText carEarlyBirdBox = (EditText) findViewById(R.id.carEarlyBirdEntry);
+            EditText motorcycleEarlyBirdBox = (EditText) findViewById(R.id.motorcycleEarlyBirdEntry);
+            EditText truckEarlyBirdBox = (EditText) findViewById(R.id.truckEarlyBirdEntry);
+
             EditText managerUsernameBox = (EditText) findViewById(R.id.managerUsernameEntry);
             EditText managerPasswordBox = (EditText) findViewById(R.id.managerPasswordEntry);
             EditText managerFirstNameBox = (EditText) findViewById(R.id.managerFirstNameEntry);
@@ -59,9 +66,21 @@ public class CreateGarageActivity extends AppCompatActivity {
             int motorcycleSpaces = (!motorcycleSpacesBox.getText().equals("")) ? Integer.parseInt(motorcycleSpacesBox.getText().toString()) : 0;
             int truckSpaces = (!truckSpacesBox.getText().equals("")) ? Integer.parseInt(truckSpacesBox.getText().toString()) : 0;
 
+            double carEarlyBird = (!carEarlyBirdBox.getText().equals("")) ? Double.parseDouble(carEarlyBirdBox.getText().toString()) : 0;
+            double motorcycleEarlyBird = (!motorcycleEarlyBirdBox.getText().equals("")) ? Double.parseDouble(motorcycleEarlyBirdBox.getText().toString()) : 0;
+            double truckEarlyBird = (!truckEarlyBirdBox.getText().equals("")) ? Double.parseDouble(truckEarlyBirdBox.getText().toString()) : 0;
+
             double carRate = (!carRateBox.getText().equals("")) ? Double.parseDouble(carRateBox.getText().toString()) : 0;
             double motorcycleRate = (!motorcycleRateBox.getText().equals("")) ? Double.parseDouble(motorcycleRateBox.getText().toString()) : 0;
             double truckRate = (!truckRateBox.getText().equals("")) ? Double.parseDouble(truckRateBox.getText().toString()) : 0;
+
+            VehicleType.CAR.setHourlyRate(carRate);
+            VehicleType.MOTORCYCLE.setEarlyBird(motorcycleRate);
+            VehicleType.TRUCK.setEarlyBird(truckRate);
+
+            VehicleType.CAR.setEarlyBird(carEarlyBird);
+            VehicleType.MOTORCYCLE.setEarlyBird(motorcycleEarlyBird);
+            VehicleType.TRUCK.setEarlyBird(truckEarlyBird);
 
             String managerUsername = managerUsernameBox.getText().toString();
             String managerPassword = managerPasswordBox.getText().toString();
@@ -78,10 +97,13 @@ public class CreateGarageActivity extends AppCompatActivity {
             }
             Garage.createGarage(assertPaymentSchemes(carTypes), assertPaymentSchemes(motorcycleTypes), assertPaymentSchemes(truckTypes),
                     carSpaces, motorcycleSpaces, truckSpaces);
-            EmployeeManagement.addEmployee(new Manager(managerUsername, managerPassword, managerFirstName, managerLastName));
-            EmployeeManagement.setActiveEmployee(EmployeeManagement.getEmployee(managerUsername));
+            employees.addEmployee(new Manager(managerUsername, managerPassword, managerFirstName, managerLastName));
+            employees.setActiveEmployee(employees.getEmployee(managerUsername));
 
             Intent intent = new Intent(this, MainActivity.class);
+
+            ((EmployeeManagementService)getApplication()).saveData();
+
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             System.out.println(Garage.garageDetails());
