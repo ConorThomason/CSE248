@@ -63,6 +63,8 @@ public class EmployeeManagementService extends Application implements Serializab
             return true;
         } catch (IOException e){
             e.printStackTrace();
+            initialize();
+            singleton.createEmployeeManagement();
             return false;
         }
 
