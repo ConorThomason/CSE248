@@ -14,6 +14,7 @@ import android.widget.EditText;
 import com.conorthomason.garageapp.EmployeeManagement;
 import com.conorthomason.garageapp.EmployeeManagementService;
 import com.conorthomason.garageapp.Garage;
+import com.conorthomason.garageapp.GarageService;
 import com.conorthomason.garageapp.Manager;
 import com.conorthomason.garageapp.PaymentScheme;
 import com.conorthomason.garageapp.R;
@@ -23,9 +24,11 @@ import java.util.ArrayList;
 
 public class CreateGarageActivity extends AppCompatActivity {
     private EmployeeManagement employees = null;
+    private Garage garage = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         employees = ((EmployeeManagementService)getApplication()).getSingleton();
+        garage = ((GarageService)getApplication()).getSingleton();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_garage);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -95,8 +98,9 @@ public class CreateGarageActivity extends AppCompatActivity {
                 NullPointerException e = new NullPointerException();
                 throw e;
             }
-            Garage.createGarage(assertPaymentSchemes(carTypes), assertPaymentSchemes(motorcycleTypes), assertPaymentSchemes(truckTypes),
+            garage.createGarage(assertPaymentSchemes(carTypes), assertPaymentSchemes(motorcycleTypes), assertPaymentSchemes(truckTypes),
                     carSpaces, motorcycleSpaces, truckSpaces);
+            employees.createEmployeeManagement();
             employees.addEmployee(new Manager(managerUsername, managerPassword, managerFirstName, managerLastName));
             employees.setActiveEmployee(employees.getEmployee(managerUsername));
 
@@ -106,7 +110,7 @@ public class CreateGarageActivity extends AppCompatActivity {
 
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-            System.out.println(Garage.garageDetails());
+            System.out.println(garage.garageDetails());
             finish();
 
         } catch (NullPointerException e){

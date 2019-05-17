@@ -12,10 +12,6 @@
             android:icon="@android:drawable/ic_menu_search"
             android:title="@string/vehicle_search" />
         <item
-            android:id="@+id/spaces"
-            android:icon="@android:drawable/ic_menu_directions"
-            android:title="@string/spaces" />
-        <item
             android:id="@+id/sign_out_button"
             android:icon="@android:drawable/ic_menu_close_clear_cancel"
             android:title="@string/sign_out"

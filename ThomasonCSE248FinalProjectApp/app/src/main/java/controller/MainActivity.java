@@ -1,9 +1,12 @@
 package controller;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,6 +21,7 @@ import com.conorthomason.garageapp.EmployeeManagement;
 import com.conorthomason.garageapp.EmployeeManagementService;
 import com.conorthomason.garageapp.Manager;
 import com.conorthomason.garageapp.R;
+import com.conorthomason.garageapp.Vehicle;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -36,6 +40,20 @@ public class MainActivity extends AppCompatActivity
     public void signUpButtonAction(Menu navMenu){
         Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
+    }
+
+    public void fabAction(Menu navMenu){
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+        LayoutInflater inflater = this.getLayoutInflater();
+        alert.setView(inflater.inflate(R.layout.custom_dialog, null));
+        alert.setPositiveButton("Create Vehicle", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                newVehicle =
+            }
+        });
+
     }
 
     protected void onDestroy(Bundle savedInstanceState){

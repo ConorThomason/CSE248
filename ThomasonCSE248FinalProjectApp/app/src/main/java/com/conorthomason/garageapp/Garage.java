@@ -5,102 +5,102 @@ import java.util.HashMap;
 
 public class Garage {
 
-    public static void setVehicles(HashMap<String, Vehicle> vehicles) {
-        Garage.vehicles = vehicles;
+    public void setVehicles(HashMap<String, Vehicle> vehicles) {
+        this.vehicles = vehicles;
     }
 
-    public static void setSpaces(ArrayList<Space> spaces) {
-        Garage.spaces = spaces;
+    public void setSpaces(ArrayList<Space> spaces) {
+        this.spaces = spaces;
     }
 
-    public static void setCarSpaces(int carSpaces) {
-        Garage.carSpaces = carSpaces;
+    public void setCarSpaces(int carSpaces) {
+        this.carSpaces = carSpaces;
     }
 
-    public static void setCurrentCars(int currentCars) {
-        Garage.currentCars = currentCars;
+    public void setCurrentCars(int currentCars) {
+        this.currentCars = currentCars;
     }
 
-    public static void setTruckSpaces(int truckSpaces) {
-        Garage.truckSpaces = truckSpaces;
+    public void setTruckSpaces(int truckSpaces) {
+        this.truckSpaces = truckSpaces;
     }
 
-    public static void setCurrentTrucks(int currentTrucks) {
-        Garage.currentTrucks = currentTrucks;
+    public void setCurrentTrucks(int currentTrucks) {
+        this.currentTrucks = currentTrucks;
     }
 
-    public static void setMotorcycleSpaces(int motorcycleSpaces) {
-        Garage.motorcycleSpaces = motorcycleSpaces;
+    public void setMotorcycleSpaces(int motorcycleSpaces) {
+        this.motorcycleSpaces = motorcycleSpaces;
     }
 
-    public static void setCurrentMotorcycles(int currentMotorcycles) {
-        Garage.currentMotorcycles = currentMotorcycles;
+    public void setCurrentMotorcycles(int currentMotorcycles) {
+        this.currentMotorcycles = currentMotorcycles;
     }
 
-    private static HashMap<String, Vehicle> vehicles;
-	private static ArrayList<Space> spaces;
-	private static int carSpaces;
-	private static int currentCars = 0;
-	private static int truckSpaces;
-	private static int currentTrucks = 0;
-	private static int motorcycleSpaces;
-	private static int currentMotorcycles = 0;
-	private static Garage _garage = new Garage();
+    private HashMap<String, Vehicle> vehicles;
+	private ArrayList<Space> spaces;
+	private int carSpaces;
+	private int currentCars = 0;
+	private int truckSpaces;
+	private int currentTrucks = 0;
+	private int motorcycleSpaces;
+	private int currentMotorcycles = 0;
+	private Garage _garage = new Garage();
 
 	private Garage() {}
 
-	public static Garage createGarage(ArrayList<PaymentScheme> carPaymentSchemes, ArrayList<PaymentScheme> motorcyclePaymentSchemes, ArrayList<PaymentScheme> truckPaymentSchemes, 
+	public Garage createGarage(ArrayList<PaymentScheme> carPaymentSchemes, ArrayList<PaymentScheme> motorcyclePaymentSchemes, ArrayList<PaymentScheme> truckPaymentSchemes,
 			int carSpaces, int truckSpaces, int motorcycleSpaces) {
-		Garage.carSpaces = carSpaces;
-		Garage.truckSpaces = truckSpaces;
-		Garage.motorcycleSpaces = motorcycleSpaces;
-		Garage.spaces = new ArrayList<Space>();
-		Garage.spaceSetup(VehicleType.CAR, Garage.carSpaces, carPaymentSchemes);
-		Garage.spaceSetup(VehicleType.MOTORCYCLE, Garage.motorcycleSpaces, motorcyclePaymentSchemes);
-		Garage.spaceSetup(VehicleType.TRUCK, Garage.truckSpaces, truckPaymentSchemes);
+		this.carSpaces = carSpaces;
+		this.truckSpaces = truckSpaces;
+		this.motorcycleSpaces = motorcycleSpaces;
+		this.spaces = new ArrayList<Space>();
+		this.spaceSetup(VehicleType.CAR, this.carSpaces, carPaymentSchemes);
+		this.spaceSetup(VehicleType.MOTORCYCLE, this.motorcycleSpaces, motorcyclePaymentSchemes);
+		this.spaceSetup(VehicleType.TRUCK, this.truckSpaces, truckPaymentSchemes);
 		vehicles = new HashMap<String, Vehicle>((carSpaces + truckSpaces + motorcycleSpaces) * 2);
 		return _garage;
 	}
 
-	public static int getCarSpaces(){
+	public int getCarSpaces(){
 	    return carSpaces;
     }
-    public static int getCurrentCars(){
+    public int getCurrentCars(){
 	    return currentCars;
     }
-    public static int getTruckSpaces(){
+    public int getTruckSpaces(){
 	    return truckSpaces;
     }
-    public static int getCurrentTrucks(){
+    public int getCurrentTrucks(){
 	    return currentTrucks;
     }
-    public static int getMotorcycleSpaces(){
+    public int getMotorcycleSpaces(){
 	    return motorcycleSpaces;
     }
-    public static int getCurrentMotorcycles(){
+    public int getCurrentMotorcycles(){
 	    return currentMotorcycles;
     }
 
-	public static ArrayList<Space> getSpaces(){
+	public ArrayList<Space> getSpaces(){
 	    return spaces;
     }
 
-	public static void spaceSetup(VehicleType vehicleType, int numberOfSpaces, ArrayList<PaymentScheme> paymentScheme) {
+	public void spaceSetup(VehicleType vehicleType, int numberOfSpaces, ArrayList<PaymentScheme> paymentScheme) {
 		for (int i = 0; i < numberOfSpaces; i++) {
 			Space newSpace = new Space(vehicleType, paymentScheme);
 			spaces.add(newSpace);
 		}
 	}
 	
-	private static boolean addVehicle(Vehicle vehicle) {
-		if (!Garage.findVehicle(vehicle.getLicensePlate())) {
+	private boolean addVehicle(Vehicle vehicle) {
+		if (!this.findVehicle(vehicle.getLicensePlate())) {
 			vehicles.put(vehicle.getLicensePlate(), vehicle);
 			return true;
 		}
 		return false;
 	}
 	
-	public static boolean spaceAvailable(VehicleType type) {
+	public boolean spaceAvailable(VehicleType type) {
 		boolean returnedValue;
 		switch(type) {
 		case CAR: returnedValue = (currentCars < carSpaces) ? true : false;
@@ -115,11 +115,11 @@ public class Garage {
 		return returnedValue;
 	}
 	
-	public static Space getSpace(int spaceIndex) {
+	public Space getSpace(int spaceIndex) {
 		return spaces.get(spaceIndex);
 	}
 	
-	public static boolean parkVehicle(Vehicle vehicle) {
+	public boolean parkVehicle(Vehicle vehicle) {
 		int carOffset = carSpaces - currentCars;
 		int motorcycleOffset = carSpaces + (motorcycleSpaces - currentMotorcycles);
 		int truckOffset = carSpaces + motorcycleSpaces + (truckSpaces - currentTrucks);
@@ -145,28 +145,28 @@ public class Garage {
 		}
 		return false;
 	}
-	public static void printVehiclesKeySet() {
+	public void printVehiclesKeySet() {
 		System.out.println("Printing Vehicles");
 		for (String vehicleLicense : vehicles.keySet()) {
 			System.out.println(vehicleLicense);
 		}
 		System.out.println("Done printing vehicles \n");
 	}
-	public static Vehicle getVehicle(String vehicleLicense) {
+	public Vehicle getVehicle(String vehicleLicense) {
 		if (findVehicle(vehicleLicense)) {
 			return vehicles.get(vehicleLicense);
 		}
 		return null;
 	}
 	
-	public static boolean findVehicle(String vehicleLicense) {
+	public boolean findVehicle(String vehicleLicense) {
 		if (vehicles.get(vehicleLicense) == null) {
 			return false;
 		}
 		return true;
 	}
 	
-	public static boolean removeVehicle(String vehicleLicense) {
+	public boolean removeVehicle(String vehicleLicense) {
 		if (findVehicle(vehicleLicense)) {
 			vehicles.remove(vehicleLicense);
 			return true;
@@ -174,12 +174,12 @@ public class Garage {
 		return false;
 	}
 	
-	public static HashMap<String, Vehicle> getVehicles() {
+	public HashMap<String, Vehicle> getVehicles() {
 		return vehicles;
 	}
 	
-	public static String garageDetails() {
-		return "Car Spaces: " + Garage.carSpaces + ", Motorcycle Spaces: " + Garage.motorcycleSpaces + ", Truck Spaces: " +
-				Garage.truckSpaces;
+	public String garageDetails() {
+		return "Car Spaces: " + this.carSpaces + ", Motorcycle Spaces: " + this.motorcycleSpaces + ", Truck Spaces: " +
+				this.truckSpaces;
 	}
 }
