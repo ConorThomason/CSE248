@@ -55,5 +55,6 @@
 
     <!-- Strings related to garage main display -->
     <string name="garage_empty">No current vehicles to display</string>
+    <string name="title_activity_vehicle_details">VehicleDetailsActivity</string>
 
 </resources>

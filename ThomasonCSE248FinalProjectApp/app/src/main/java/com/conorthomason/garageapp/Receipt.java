@@ -7,7 +7,7 @@ public class Receipt extends Ticket {
 	private double chargedAndPaid;
 	private Garage garage = null;
 	
-	public Receipt (Vehicle vehicle, Attendant attendant, Space space,  PaymentScheme paymentScheme) {
+	public Receipt (Vehicle vehicle, String attendant, Space space,  PaymentScheme paymentScheme) {
 		super(vehicle, attendant, paymentScheme);
 		setCalculatedRate(vehicle, space);
 	}

@@ -61,6 +61,7 @@ public class Garage implements Serializable {
 		this.spaceSetup(VehicleType.MOTORCYCLE, this.motorcycleSpaces, motorcyclePaymentSchemes);
 		this.spaceSetup(VehicleType.TRUCK, this.truckSpaces, truckPaymentSchemes);
 		vehicles = new HashMap<String, Vehicle>((carSpaces + truckSpaces + motorcycleSpaces) * 2);
+		TimeControl.startTime(1);
 		return _garage;
 	}
 
@@ -121,7 +122,9 @@ public class Garage implements Serializable {
 		return spaces.get(spaceIndex);
 	}
 	
-	public boolean parkVehicle(Vehicle vehicle) {
+	public boolean parkVehicle(Vehicle vehicle, PaymentScheme payment) {
+	    ArrayList<PaymentScheme> paymentSchemes = new ArrayList<>();
+	    paymentSchemes.add(payment);
 		int carOffset = carSpaces - currentCars;
 		int motorcycleOffset = carSpaces + (motorcycleSpaces - currentMotorcycles);
 		int truckOffset = carSpaces + motorcycleSpaces + (truckSpaces - currentTrucks);
@@ -130,20 +133,29 @@ public class Garage implements Serializable {
 			case CAR:
 				vehicle.setParkingSpot(carOffset);
 				spaces.get(carSpaces - currentCars).setVehicleLicense(vehicle.getLicensePlate());
+                spaces.get(carSpaces - currentCars).setTimeDateParked(TimeControl.getCurrentTime());
+                spaces.get(carSpaces - currentCars).setAcceptedPaymentSchemes(paymentSchemes);
+                currentCars++;
 				break;
 			case MOTORCYCLE:
 				vehicle.setParkingSpot(motorcycleOffset);
 				spaces.get(motorcycleSpaces - currentMotorcycles).setVehicleLicense(vehicle.getLicensePlate());
+                spaces.get(motorcycleSpaces - currentMotorcycles).setTimeDateParked(TimeControl.getCurrentTime());
+                spaces.get(motorcycleSpaces - currentMotorcycles).setAcceptedPaymentSchemes(paymentSchemes);
+				currentMotorcycles++;
 				break;
 			case TRUCK:
 				vehicle.setParkingSpot(truckOffset);
 				spaces.get(truckSpaces - currentTrucks).setVehicleLicense(vehicle.getLicensePlate());
+                spaces.get(truckSpaces - currentTrucks).setTimeDateParked(TimeControl.getCurrentTime());
+                spaces.get(truckSpaces - currentTrucks).setAcceptedPaymentSchemes(paymentSchemes);
+				currentTrucks++;
 				break;
 			default:
 				break;
 			}
 			addVehicle(vehicle);
-			currentCars++;
+
 			return true;
 		}
 		return false;

@@ -3,7 +3,9 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -45,5 +47,39 @@
         android:ems="10"
         android:hint="Vehicle License Plate"
         android:inputType="textPersonName" />
+
+    <RadioGroup
+        android:id="@+id/paymentRadioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RadioButton
+            android:id="@+id/cashRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cash" />
+
+        <RadioButton
+            android:id="@+id/checkRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Check" />
+
+        <RadioButton
+            android:id="@+id/debitRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Debit" />
+
+        <RadioButton
+            android:id="@+id/creditRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Credit" />
+    </RadioGroup>
 
 </LinearLayout>

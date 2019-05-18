@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -28,10 +29,13 @@ import com.conorthomason.garageapp.Employee;
 import com.conorthomason.garageapp.EmployeeManagement;
 import com.conorthomason.garageapp.Garage;
 import com.conorthomason.garageapp.Manager;
+import com.conorthomason.garageapp.PaymentScheme;
 import com.conorthomason.garageapp.R;
 import com.conorthomason.garageapp.SingletonService;
+import com.conorthomason.garageapp.TimeControl;
 import com.conorthomason.garageapp.Vehicle;
 import com.conorthomason.garageapp.VehicleType;
+import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -71,14 +75,19 @@ public class MainActivity extends AppCompatActivity
         alert.setTitle("Create Vehicle");
         alert.setView(dialogView);
         final RadioGroup radioGroup = (RadioGroup)dialogView.findViewById(R.id.vehicleRadioGroup);
+        final RadioGroup paymentRadioGroup = (RadioGroup)dialogView.findViewById(R.id.paymentRadioGroup);
         radioGroup.check(R.id.carRadioButton);
+        paymentRadioGroup.check(R.id.cashRadioButton);
+
         alert.setPositiveButton("Create Vehicle", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     final EditText plateInput = (EditText) dialogView.findViewById(R.id.vehicleCreationPlateInput);
 
                     int id = radioGroup.getCheckedRadioButtonId();
+                    int paymentId = paymentRadioGroup.getCheckedRadioButtonId();
                     final VehicleType selectedType;
+                    final PaymentScheme selectedPayment;
                     try{
                         switch(id){
                             case R.id.carRadioButton:
@@ -93,9 +102,25 @@ public class MainActivity extends AppCompatActivity
                             default:
                                 throw new NullPointerException();
                         }
+                        switch(paymentId){
+                            case R.id.cashRadioButton:
+                                selectedPayment = PaymentScheme.CASH;
+                                break;
+                            case R.id.checkRadioButton:
+                                selectedPayment = PaymentScheme.CHECK;
+                                break;
+                            case R.id.debitRadioButton:
+                                selectedPayment = PaymentScheme.DEBIT;
+                                break;
+                            case R.id.creditRadioButton:
+                                selectedPayment = PaymentScheme.CREDIT;
+                                break;
+                            default:
+                                throw new NullPointerException();
+                        }
 
                     Employee parkingEmployee = employees.getActiveEmployee();
-                        boolean success = garage.parkVehicle(new Vehicle(selectedType, parkingEmployee.getFullName(), plateInput.getText().toString()));
+                        boolean success = garage.parkVehicle(new Vehicle(selectedType, parkingEmployee.getFullName(), plateInput.getText().toString()), selectedPayment);
                     if (!success){
                         throw new NullPointerException();
                     }
@@ -132,7 +157,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         employees = ((SingletonService)getApplication()).getEmployeeManagementSingleton();
         garage = ((SingletonService)getApplication()).getGarageSingleton();
         garage=garage;
@@ -146,8 +170,8 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        final View rvView = getLayoutInflater().inflate(R.layout.content_main, null);
-        RecyclerView rvVehicles = (RecyclerView) rvView.findViewById(R.id.rvVehicles);
+        final View rvView = getLayoutInflater().inflate(R.layout.app_bar_main, null);
+        RecyclerView rvVehicles = (RecyclerView) findViewById(R.id.rvVehicles);
         vehicles = new ArrayList<>();
         try {
             Iterator it = garage.getVehicles().entrySet().iterator();
@@ -159,9 +183,19 @@ public class MainActivity extends AppCompatActivity
         } catch (NullPointerException e){
             e.printStackTrace();
         }
+
         VehiclesAdapter adapter = new VehiclesAdapter(vehicles);
         rvVehicles.setAdapter(adapter);
         rvVehicles.setLayoutManager(new LinearLayoutManager(this));
+        rvVehicles.addOnItemTouchListener(new RecyclerViewTouchListener(getApplicationContext(), recyclerView, new RecyclerViewClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Intent intent = new Intent(MainActivity.this, VehicleDetailsActivity.class);
+                intent.putExtra("Vehicle", vehicles.get(position));
+                startActivity(intent);
+                finish();
+            }
+        }));
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

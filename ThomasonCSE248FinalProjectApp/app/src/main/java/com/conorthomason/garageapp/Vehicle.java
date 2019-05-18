@@ -115,7 +115,7 @@ public class Vehicle implements Serializable {
     }
 
     public String getDetails(){
-	    return "Vehicle Type: " + vehicleType.toString() + " \t Parked By: " + parkedBy;
+	    return "Vehicle Type: " + vehicleType.toString() + " \t Parked By: " + parkedBy + "\nDistance: " + getParkingSpot();
     }
 	
 }

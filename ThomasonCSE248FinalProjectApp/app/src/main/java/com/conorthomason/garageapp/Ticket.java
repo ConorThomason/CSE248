@@ -19,10 +19,10 @@ public class Ticket {
 		
 	}
 	
-	public Ticket (Vehicle vehicle, Attendant attendant, PaymentScheme paymentScheme) {
+	public Ticket (Vehicle vehicle, String attendant, PaymentScheme paymentScheme) {
 		setLicensePlate(vehicle.getLicensePlate());
 		this.vehicleType = vehicle.getVehicleType();
-		this.attendantName = attendant.getFullName();
+		this.attendantName = attendant;
 		setDateAndTime();
 		this.paymentScheme = paymentScheme;
 	}
