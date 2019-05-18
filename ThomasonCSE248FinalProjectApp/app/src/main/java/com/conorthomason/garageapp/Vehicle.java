@@ -1,5 +1,7 @@
 package com.conorthomason.garageapp;
 
+import java.io.Serializable;
+
 /**
  * The Vehicle class is the object stored in the main data structure. Data is stored and manipulated here
  * 
@@ -11,7 +13,7 @@ package com.conorthomason.garageapp;
  *
  */
 
-public class Vehicle {
+public class Vehicle implements Serializable {
 	
 	private VehicleType vehicleType;
 	private String parkedBy;
@@ -107,5 +109,13 @@ public class Vehicle {
 	public String toString() {
 		return ("Vehicle Type: " + vehicleType.toString() + "\t Parked By: " + parkedBy + "\t License Plate: " + licensePlate);
 	}
+
+	public String getMainTextFormat(){
+	    return "License Plate: " + licensePlate;
+    }
+
+    public String getDetails(){
+	    return "Vehicle Type: " + vehicleType.toString() + " \t Parked By: " + parkedBy;
+    }
 	
 }

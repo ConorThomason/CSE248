@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Iterator;
+import java.util.Map;
 
 public class SingletonService extends Application implements Serializable {
     private static SingletonService application;
@@ -42,9 +44,21 @@ public class SingletonService extends Application implements Serializable {
         return employeeManagementSingleton;
     }
 
+    public void setGarageSingleton(Garage garage){
+        this.garageSingleton = garage;
+    }
+
     public void saveData(){
         saveGarage();
         saveEmployees();
+    }
+
+    public static void printMap(Map mp) {
+        Iterator it = mp.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            System.out.println(pair.getKey() + " = " + pair.getValue());
+        }
     }
 
     public void loadData(){
@@ -58,6 +72,8 @@ public class SingletonService extends Application implements Serializable {
             ObjectOutputStream objectOut = new ObjectOutputStream(fos);
             objectOut.writeObject(garageSingleton);
             objectOut.close();
+            System.out.println("Saving garage...");
+            printMap(garageSingleton.getVehicles());
             return true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -72,18 +88,19 @@ public class SingletonService extends Application implements Serializable {
             ObjectInputStream objectIn = new ObjectInputStream(fis);
 
             try {
-                Garage garage = (Garage) objectIn.readObject();
+                Garage garage = (Garage)objectIn.readObject();
                 this.garageSingleton = garage;
+                System.out.println("Loaded garage");
+                printMap(garageSingleton.getVehicles());
+                return true;
             } catch (ClassNotFoundException f){
                 f.printStackTrace();
             }
-            System.out.println("Loaded data");
-            return true;
         } catch (IOException e){
             initializeGarage();
             e.printStackTrace();
-            return false;
         }
+        return false;
     }
     public boolean loadEmployees(){
         try{
@@ -97,7 +114,8 @@ public class SingletonService extends Application implements Serializable {
             } catch (ClassNotFoundException f){
                 f.printStackTrace();
             }
-            System.out.println("Loaded data");
+            System.out.println("Loaded garage");
+            System.out.println(garageSingleton.garageDetails());
             return true;
         } catch (IOException e){
             e.printStackTrace();

@@ -1,9 +1,10 @@
 package com.conorthomason.garageapp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Garage {
+public class Garage implements Serializable {
 
     public void setVehicles(HashMap<String, Vehicle> vehicles) {
         this.vehicles = vehicles;
@@ -142,6 +143,7 @@ public class Garage {
 				break;
 			}
 			addVehicle(vehicle);
+			currentCars++;
 			return true;
 		}
 		return false;

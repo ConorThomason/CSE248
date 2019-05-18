@@ -1,10 +1,11 @@
 package com.conorthomason.garageapp;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Space {
+public class Space implements Serializable {
 	private String vehicleLicense;
 	private VehicleType vehicleType;
 	private Instant timeDateParked;

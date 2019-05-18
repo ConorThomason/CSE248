@@ -13,15 +13,16 @@ class ReceiptTests {
 	ArrayList<PaymentScheme> carPayment = new ArrayList<PaymentScheme>();
 	ArrayList<PaymentScheme> truckPayment = new ArrayList<PaymentScheme>();
 	ArrayList<PaymentScheme> motorcyclePayment = new ArrayList<PaymentScheme>();
+    Garage garage = new Garage();
 	
 	@Test
 	void instantiationTest() {
 		TimeControl.createTimeThread(1);
-		Garage.createGarage(carPayment, motorcyclePayment, truckPayment, 5, 5, 5);
+		garage.createGarage(carPayment, motorcyclePayment, truckPayment, 5, 5, 5);
 		Vehicle vehicle = new Vehicle(VehicleType.CAR, "John", "AA12 345");
-		Garage.parkVehicle(vehicle);
+		garage.parkVehicle(vehicle);
 		Attendant attendant = new Attendant("Test", "123", "John", "Doe");
-		Receipt receipt = new Receipt(vehicle, attendant, PaymentScheme.CASH);
+		Receipt receipt = new Receipt(vehicle, attendant, garage.getSpace(vehicle.getParkingSpot()), PaymentScheme.CASH);
 		assertTrue(vehicle.getLicensePlate().equals(receipt.getLicensePlate()));
 		assertTrue(vehicle.getVehicleType().equals(receipt.getVehicleType()));
 		assertTrue(attendant.getFullName().equals(receipt.getAttendantName()));

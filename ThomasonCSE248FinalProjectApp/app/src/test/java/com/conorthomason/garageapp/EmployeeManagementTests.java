@@ -11,7 +11,7 @@ class EmployeeManagementTests {
 	
 	@Test
 	void addEmployeeTest() {
-		EmployeeManagement.createEmployeeManagement();
+		employees.createEmployeeManagement();
 		Employee employee = new Employee("Test", "123", "John", "Doe");
 		employees.addEmployee(employee);
 		assertTrue(employees.findEmployee(employee.getUsername()));
@@ -19,7 +19,7 @@ class EmployeeManagementTests {
 	
 	@Test
 	void removeEmployeeTest() {
-		EmployeeManagement.createEmployeeManagement();
+		employees.createEmployeeManagement();
 		Employee employee = new Employee("Test", "123", "John", "Doe");
 		employees.addEmployee(employee);
 		employees.removeEmployee(employee.getUsername());
@@ -28,7 +28,7 @@ class EmployeeManagementTests {
 	
 	@Test
 	void duplicateEmployeeTest() {
-		EmployeeManagement.createEmployeeManagement();
+		employees.createEmployeeManagement();
 		Employee employee = new Employee("Test", "123", "John", "Doe");
 		Employee employee2 = new Employee("Test", "456", "Jane", "Doe");
 		employees.addEmployee(employee);

@@ -22,7 +22,8 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ((SingletonService)getApplication()).loadData();
+        ((SingletonService)getApplication()).loadGarage();
+        ((SingletonService)getApplication()).loadEmployees();
         employees = ((SingletonService)getApplicationContext()).getEmployeeManagementSingleton();
         System.out.println("Employee Management Created");
     }

@@ -1,6 +1,8 @@
 package com.conorthomason.garageapp;
 
-public enum VehicleType {
+import java.io.Serializable;
+
+public enum VehicleType implements Serializable {
 	CAR (20.00, 2.50), 
 	TRUCK (40.00, 5.00), 
 	MOTORCYCLE (10.00, 1.00);

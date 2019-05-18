@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -31,15 +33,24 @@ import com.conorthomason.garageapp.SingletonService;
 import com.conorthomason.garageapp.Vehicle;
 import com.conorthomason.garageapp.VehicleType;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private EmployeeManagement employees = null;
     private Garage garage = null;
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private ArrayList<Vehicle> vehicles;
 
     public void signOutButtonAction(Menu navMenu){
 
-        ((SingletonService) getApplication()).saveData();
+        ((SingletonService) getApplication()).saveGarage();
+        ((SingletonService) getApplication()).saveEmployees();
         Intent intent = new Intent(this, SignInActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
@@ -52,10 +63,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void fabAction(View view){
+        garage = garage;
+        garage = ((SingletonService)getApplication()).getGarageSingleton();
         final AlertDialog.Builder alert = new AlertDialog.Builder(this);
         final View dialogView = getLayoutInflater().inflate(R.layout.custom_dialog, null);
-        alert.setView(dialogView
-        );
+        alert.setView(dialogView);
         alert.setTitle("Create Vehicle");
         alert.setView(dialogView);
         final RadioGroup radioGroup = (RadioGroup)dialogView.findViewById(R.id.vehicleRadioGroup);
@@ -83,12 +95,18 @@ public class MainActivity extends AppCompatActivity
                         }
 
                     Employee parkingEmployee = employees.getActiveEmployee();
-                    garage.parkVehicle(new Vehicle(selectedType, parkingEmployee.getFullName(), plateInput.getText().toString()));
+                        boolean success = garage.parkVehicle(new Vehicle(selectedType, parkingEmployee.getFullName(), plateInput.getText().toString()));
+                    if (!success){
+                        throw new NullPointerException();
+                    }
+                    //Somewhere after here, vehicles are reset to 0.
+                    ((SingletonService)getApplication()).saveGarage();
+                    printMap(garage.getVehicles());
                     } catch (NullPointerException e) {
                         e.printStackTrace();
                         AlertDialog.Builder error = new AlertDialog.Builder(MainActivity.this);
                         error.setTitle("Creation error");
-                        error.setMessage("One or more required fields were not filled. Please try again");
+                        error.setMessage("Entered values are either duplicates or incomplete. Please try again.");
                         error.setPositiveButton("OK", null);
                         error.show();
                     }
@@ -100,17 +118,51 @@ public class MainActivity extends AppCompatActivity
     }
 
     protected void onDestroy(Bundle savedInstanceState){
-        ((SingletonService)getApplication()).saveData();
+        ((SingletonService)getApplication()).saveGarage();
+        ((SingletonService)getApplication()).saveEmployees();
+    }
+
+    public static void printMap(Map mp) {
+        Iterator it = mp.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            System.out.println(pair.getKey() + " = " + pair.getValue());
+        }
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         employees = ((SingletonService)getApplication()).getEmployeeManagementSingleton();
         garage = ((SingletonService)getApplication()).getGarageSingleton();
+        garage=garage;
+        try {
+            garage.printVehiclesKeySet();
+        } catch (NullPointerException e){
+            e.printStackTrace();
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        final View rvView = getLayoutInflater().inflate(R.layout.content_main, null);
+        RecyclerView rvVehicles = (RecyclerView) rvView.findViewById(R.id.rvVehicles);
+        vehicles = new ArrayList<>();
+        try {
+            Iterator it = garage.getVehicles().entrySet().iterator();
+            while (it.hasNext()) {
+                Map.Entry pair = (Map.Entry) it.next();
+                System.out.println(pair.getKey() + " = " + pair.getValue());
+                vehicles.add((Vehicle) pair.getValue());
+            }
+        } catch (NullPointerException e){
+            e.printStackTrace();
+        }
+        VehiclesAdapter adapter = new VehiclesAdapter(vehicles);
+        rvVehicles.setAdapter(adapter);
+        rvVehicles.setLayoutManager(new LinearLayoutManager(this));
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -129,7 +181,6 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         Menu navMenu = navigationView.getMenu();
-        employees = ((SingletonService)getApplication()).getEmployeeManagementSingleton();
         if (employees.getActiveEmployee() instanceof Manager){
             navMenu.findItem(R.id.sign_up_button).setVisible(true);
             navMenu.findItem(R.id.employee_management).setVisible(true);

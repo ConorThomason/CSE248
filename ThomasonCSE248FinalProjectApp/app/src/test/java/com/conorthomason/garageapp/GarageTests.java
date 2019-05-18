@@ -11,38 +11,49 @@ class GarageTests {
 	ArrayList<PaymentScheme> carPayment = new ArrayList<PaymentScheme>();
 	ArrayList<PaymentScheme> truckPayment = new ArrayList<PaymentScheme>();
 	ArrayList<PaymentScheme> motorcyclePayment = new ArrayList<PaymentScheme>();
+    Garage garage = new Garage();
 	
 	@Test
 	void instantiationTest() {
-		Garage.createGarage(carPayment, motorcyclePayment, truckPayment, 5, 5, 5);
+
+		garage.createGarage(carPayment, motorcyclePayment, truckPayment, 5, 5, 5);
 		carPayment.add(PaymentScheme.CASH);
 		motorcyclePayment.add(PaymentScheme.DEBIT);
 		truckPayment.add(PaymentScheme.CREDIT);
-		assertTrue(Garage.garageDetails().equals("Car Spaces: 5, Motorcycle Spaces: 5, Truck Spaces: 5"));
+		assertTrue(garage.garageDetails().equals("Car Spaces: 5, Motorcycle Spaces: 5, Truck Spaces: 5"));
 	}
 	
 	@Test
 	void parkVehicleTest() {
-		Garage.createGarage(carPayment, motorcyclePayment, truckPayment, 5, 5, 5);
+		garage.createGarage(carPayment, motorcyclePayment, truckPayment, 5, 5, 5);
 		Vehicle testVehicle = new Vehicle(VehicleType.CAR, "Test", "TEST PLA");
-		assertTrue(Garage.parkVehicle(testVehicle));
+		assertTrue(garage.parkVehicle(testVehicle));
 	}
 	
 	@Test
 	void findVehicleTest() {
-		Garage.createGarage(carPayment, motorcyclePayment, truckPayment, 5, 5, 5);
+		garage.createGarage(carPayment, motorcyclePayment, truckPayment, 5, 5, 5);
 		Vehicle testVehicle = new Vehicle(VehicleType.CAR, "Test", "TEST PLA");
-		assertTrue(Garage.parkVehicle(testVehicle));
-		assertTrue(Garage.findVehicle(testVehicle.getLicensePlate()));
+		assertTrue(garage.parkVehicle(testVehicle));
+		assertTrue(garage.findVehicle(testVehicle.getLicensePlate()));
 	}
 	@Test
 	void getVehicleTest() {
-		Garage.createGarage(carPayment, motorcyclePayment, truckPayment, 5, 5, 5);
+		garage.createGarage(carPayment, motorcyclePayment, truckPayment, 5, 5, 5);
 		Vehicle testVehicle = new Vehicle(VehicleType.CAR, "Test", "TEST PLA");
-		assertTrue(Garage.parkVehicle(testVehicle));
-		assertTrue(Garage.findVehicle(testVehicle.getLicensePlate()));
-		assertEquals(testVehicle, Garage.getVehicle("TESTPLA"));
-		
+		assertTrue(garage.parkVehicle(testVehicle));
+		assertTrue(garage.findVehicle(testVehicle.getLicensePlate()));
+		assertEquals(testVehicle, garage.getVehicle("TESTPLA"));
 	}
+	@Test
+    void parkMultipleTest(){
+        garage.createGarage(carPayment, motorcyclePayment, truckPayment, 5, 5, 5);
+        Vehicle testVehicle = new Vehicle(VehicleType.CAR, "Test", "TEST PLA");
+        Vehicle testVehicle2 = new Vehicle(VehicleType.CAR, "Test2", "TEST PLA2");
+        garage.parkVehicle(testVehicle);
+        garage.parkVehicle(testVehicle2);
+        assertTrue(garage.getVehicle("TESTPLA").equals(testVehicle));
+        assertTrue(garage.getVehicle("TESTPLA2").equals(testVehicle2));
+    }
 
 }

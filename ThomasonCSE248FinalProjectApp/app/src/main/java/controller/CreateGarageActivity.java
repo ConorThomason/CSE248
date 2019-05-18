@@ -63,17 +63,21 @@ public class CreateGarageActivity extends AppCompatActivity {
             CheckBox truckDebitBox = (CheckBox) findViewById(R.id.truckDebitCheckBox);
             CheckBox truckCreditBox = (CheckBox) findViewById(R.id.truckCreditCheckBox);
 
-            int carSpaces = (!carSpacesBox.getText().equals("")) ? Integer.parseInt(carSpacesBox.getText().toString()) : 0;
-            int motorcycleSpaces = (!motorcycleSpacesBox.getText().equals("")) ? Integer.parseInt(motorcycleSpacesBox.getText().toString()) : 0;
-            int truckSpaces = (!truckSpacesBox.getText().equals("")) ? Integer.parseInt(truckSpacesBox.getText().toString()) : 0;
+            int carSpaces = (!carSpacesBox.getText().toString().equals("")) ? Integer.parseInt(carSpacesBox.getText().toString()) : 0;
+            int motorcycleSpaces = (!motorcycleSpacesBox.getText().toString().equals("")) ? Integer.parseInt(motorcycleSpacesBox.getText().toString()) : 0;
+            int truckSpaces = (!truckSpacesBox.getText().toString().equals("")) ? Integer.parseInt(truckSpacesBox.getText().toString()) : 0;
 
-            double carEarlyBird = (!carEarlyBirdBox.getText().equals("")) ? Double.parseDouble(carEarlyBirdBox.getText().toString()) : 0;
-            double motorcycleEarlyBird = (!motorcycleEarlyBirdBox.getText().equals("")) ? Double.parseDouble(motorcycleEarlyBirdBox.getText().toString()) : 0;
-            double truckEarlyBird = (!truckEarlyBirdBox.getText().equals("")) ? Double.parseDouble(truckEarlyBirdBox.getText().toString()) : 0;
+            System.out.println(carSpaces);
+            System.out.println(motorcycleSpaces);
+            System.out.println(truckSpaces);
 
-            double carRate = (!carRateBox.getText().equals("")) ? Double.parseDouble(carRateBox.getText().toString()) : 0;
-            double motorcycleRate = (!motorcycleRateBox.getText().equals("")) ? Double.parseDouble(motorcycleRateBox.getText().toString()) : 0;
-            double truckRate = (!truckRateBox.getText().equals("")) ? Double.parseDouble(truckRateBox.getText().toString()) : 0;
+            double carEarlyBird = (!carEarlyBirdBox.getText().toString().equals("")) ? Double.parseDouble(carEarlyBirdBox.getText().toString()) : 0;
+            double motorcycleEarlyBird = (!motorcycleEarlyBirdBox.getText().toString().equals("")) ? Double.parseDouble(motorcycleEarlyBirdBox.getText().toString()) : 0;
+            double truckEarlyBird = (!truckEarlyBirdBox.getText().toString().equals("")) ? Double.parseDouble(truckEarlyBirdBox.getText().toString()) : 0;
+
+            double carRate = (!carRateBox.getText().toString().equals("")) ? Double.parseDouble(carRateBox.getText().toString()) : 0;
+            double motorcycleRate = (!motorcycleRateBox.getText().toString().equals("")) ? Double.parseDouble(motorcycleRateBox.getText().toString()) : 0;
+            double truckRate = (!truckRateBox.getText().toString().equals("")) ? Double.parseDouble(truckRateBox.getText().toString()) : 0;
 
             VehicleType.CAR.setHourlyRate(carRate);
             VehicleType.MOTORCYCLE.setEarlyBird(motorcycleRate);
@@ -98,12 +102,14 @@ public class CreateGarageActivity extends AppCompatActivity {
             }
             garage.createGarage(assertPaymentSchemes(carTypes), assertPaymentSchemes(motorcycleTypes), assertPaymentSchemes(truckTypes),
                     carSpaces, motorcycleSpaces, truckSpaces);
+            ((SingletonService)getApplication()).setGarageSingleton(garage);
             employees.createEmployeeManagement();
             employees.addEmployee(new Manager(managerUsername, managerPassword, managerFirstName, managerLastName));
             employees.setActiveEmployee(employees.getEmployee(managerUsername));
 
             Intent intent = new Intent(this, MainActivity.class);
 
+            ((SingletonService)getApplication()).saveGarage();
             ((SingletonService)getApplication()).saveEmployees();
 
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
