@@ -10,8 +10,8 @@ import android.widget.EditText;
 
 import com.conorthomason.garageapp.Employee;
 import com.conorthomason.garageapp.EmployeeManagement;
-import com.conorthomason.garageapp.EmployeeManagementService;
 import com.conorthomason.garageapp.R;
+import com.conorthomason.garageapp.SingletonService;
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -22,8 +22,8 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ((EmployeeManagementService)getApplication()).loadData();
-        employees = ((EmployeeManagementService)getApplicationContext()).getSingleton();
+        ((SingletonService)getApplication()).loadData();
+        employees = ((SingletonService)getApplicationContext()).getEmployeeManagementSingleton();
         System.out.println("Employee Management Created");
     }
 

@@ -45,9 +45,10 @@ public class Garage {
 	private int currentTrucks = 0;
 	private int motorcycleSpaces;
 	private int currentMotorcycles = 0;
-	private Garage _garage = new Garage();
+	private Garage _garage;
 
-	private Garage() {}
+	public Garage() {
+    }
 
 	public Garage createGarage(ArrayList<PaymentScheme> carPaymentSchemes, ArrayList<PaymentScheme> motorcyclePaymentSchemes, ArrayList<PaymentScheme> truckPaymentSchemes,
 			int carSpaces, int truckSpaces, int motorcycleSpaces) {

@@ -2,8 +2,6 @@ package controller;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -12,12 +10,11 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.conorthomason.garageapp.EmployeeManagement;
-import com.conorthomason.garageapp.EmployeeManagementService;
 import com.conorthomason.garageapp.Garage;
-import com.conorthomason.garageapp.GarageService;
 import com.conorthomason.garageapp.Manager;
 import com.conorthomason.garageapp.PaymentScheme;
 import com.conorthomason.garageapp.R;
+import com.conorthomason.garageapp.SingletonService;
 import com.conorthomason.garageapp.VehicleType;
 
 import java.util.ArrayList;
@@ -25,10 +22,11 @@ import java.util.ArrayList;
 public class CreateGarageActivity extends AppCompatActivity {
     private EmployeeManagement employees = null;
     private Garage garage = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        employees = ((EmployeeManagementService)getApplication()).getSingleton();
-        garage = ((GarageService)getApplication()).getSingleton();
+        employees = ((SingletonService)getApplication()).getEmployeeManagementSingleton();
+        garage = ((SingletonService)getApplication()).getGarageSingleton();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_garage);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -106,7 +104,7 @@ public class CreateGarageActivity extends AppCompatActivity {
 
             Intent intent = new Intent(this, MainActivity.class);
 
-            ((EmployeeManagementService)getApplication()).saveData();
+            ((SingletonService)getApplication()).saveEmployees();
 
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);

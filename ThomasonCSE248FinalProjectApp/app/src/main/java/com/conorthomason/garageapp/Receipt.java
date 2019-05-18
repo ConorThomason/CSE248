@@ -5,19 +5,19 @@ import java.time.Duration;
 public class Receipt extends Ticket {
 	
 	private double chargedAndPaid;
+	private Garage garage = null;
 	
-	public Receipt (Vehicle vehicle, Attendant attendant, PaymentScheme paymentScheme) {
+	public Receipt (Vehicle vehicle, Attendant attendant, Space space,  PaymentScheme paymentScheme) {
 		super(vehicle, attendant, paymentScheme);
-		setCalculatedRate(vehicle);
+		setCalculatedRate(vehicle, space);
 	}
-	public void setCalculatedRate(Vehicle vehicle) {
-		this.chargedAndPaid = getCalculatedRate(vehicle);
+	public void setCalculatedRate(Vehicle vehicle, Space space) {
+		this.chargedAndPaid = getCalculatedRate(vehicle, space);
 		//TODO Add early bird pricing
 	}
-	public double getCalculatedRate(Vehicle vehicle) {
-		int parkingSpot = Garage.getVehicle(vehicle.getLicensePlate()).getParkingSpot();
-		Space vehicleSpace = Garage.getSpace(parkingSpot);
-		long hours = Duration.between(vehicleSpace.getTimeDateParked(), TimeControl.getCurrentTime()).toHours();
+	public double getCalculatedRate(Vehicle vehicle, Space space) {
+		int parkingSpot = vehicle.getParkingSpot();
+		long hours = Duration.between(space.getTimeDateParked(), TimeControl.getCurrentTime()).toHours();
 		return hours * vehicle.getVehicleType().getHourlyRate();
 	}
 	

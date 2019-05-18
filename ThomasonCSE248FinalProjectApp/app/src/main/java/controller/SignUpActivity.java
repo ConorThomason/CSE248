@@ -12,16 +12,16 @@ import android.widget.TextView;
 import com.conorthomason.garageapp.Attendant;
 import com.conorthomason.garageapp.Employee;
 import com.conorthomason.garageapp.EmployeeManagement;
-import com.conorthomason.garageapp.EmployeeManagementService;
 import com.conorthomason.garageapp.Manager;
 import com.conorthomason.garageapp.R;
+import com.conorthomason.garageapp.SingletonService;
 
 public class SignUpActivity extends AppCompatActivity {
 
     private EmployeeManagement employees = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        employees = ((EmployeeManagementService)getApplication()).getSingleton();
+        employees = ((SingletonService)getApplication()).getEmployeeManagementSingleton();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         Toolbar toolbar = findViewById(R.id.toolbar);

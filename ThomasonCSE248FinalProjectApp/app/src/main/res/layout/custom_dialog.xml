@@ -1,61 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal">
 
     <LinearLayout
-        android:layout_width="430dp"
-        android:layout_height="91dp"
-        android:orientation="vertical">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-        <LinearLayout
+        <RadioGroup
+            android:id="@+id/vehicleRadioGroup"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent">
 
-            <RadioGroup
-                android:id="@+id/vehicleRadioGroup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/truckRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Truck" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/carRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Car" />
 
-                    <RadioButton
-                        android:id="@+id/carRadioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Car" />
-
-                    <RadioButton
-                        android:id="@+id/motorcycleRadioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Motorcycle" />
-
-                    <RadioButton
-                        android:id="@+id/truckRadioButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Truck" />
-                </LinearLayout>
-
-            </RadioGroup>
-        </LinearLayout>
-
-        <EditText
-            android:id="@+id/vehicleCreationPlateInput"
-            android:layout_width="411dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Vehicle License Plate"
-            android:inputType="textPersonName" />
+            <RadioButton
+                android:id="@+id/motorcycleRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Motorcycle" />
+        </RadioGroup>
 
     </LinearLayout>
+
+    <EditText
+        android:id="@+id/vehicleCreationPlateInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Vehicle License Plate"
+        android:inputType="textPersonName" />
+
 </LinearLayout>
