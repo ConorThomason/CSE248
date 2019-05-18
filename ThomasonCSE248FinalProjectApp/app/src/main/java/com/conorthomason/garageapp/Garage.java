@@ -182,6 +182,18 @@ public class Garage implements Serializable {
 	}
 	
 	public boolean removeVehicle(String vehicleLicense) {
+	    VehicleType type = this.getVehicle(vehicleLicense).getVehicleType();
+	    switch (type){
+            case CAR:
+                currentCars--;
+                break;
+            case MOTORCYCLE:
+                currentMotorcycles--;
+                break;
+            case TRUCK:
+                currentTrucks--;
+                break;
+        }
 		if (findVehicle(vehicleLicense)) {
 			vehicles.remove(vehicleLicense);
 			return true;

@@ -8,10 +8,6 @@
         android:checkableBehavior="single"
         android:enabled="true">
         <item
-            android:id="@+id/vehicle_search"
-            android:icon="@android:drawable/ic_menu_search"
-            android:title="@string/vehicle_search" />
-        <item
             android:id="@+id/sign_out_button"
             android:icon="@android:drawable/ic_menu_close_clear_cancel"
             android:title="@string/sign_out"

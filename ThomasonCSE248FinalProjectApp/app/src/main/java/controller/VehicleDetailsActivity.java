@@ -1,6 +1,8 @@
 package controller;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.View;
@@ -13,6 +15,7 @@ import com.conorthomason.garageapp.Garage;
 import com.conorthomason.garageapp.R;
 import com.conorthomason.garageapp.Receipt;
 import com.conorthomason.garageapp.SingletonService;
+import com.conorthomason.garageapp.TimeControl;
 import com.conorthomason.garageapp.Utilities;
 import com.conorthomason.garageapp.Vehicle;
 
@@ -22,6 +25,7 @@ public class VehicleDetailsActivity extends Activity {
     private EmployeeManagement employees = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        TimeControl.startTime(1);
         vehicle = (Vehicle) getIntent().getSerializableExtra("Vehicle");
         garage = ((SingletonService)getApplication()).getGarageSingleton();
         employees = ((SingletonService)getApplication()).getEmployeeManagementSingleton();
@@ -44,12 +48,33 @@ public class VehicleDetailsActivity extends Activity {
                 AlertDialog.Builder removal = new AlertDialog.Builder(VehicleDetailsActivity.this);
                 removal.setTitle("Receipt");
                 Receipt receipt = new Receipt(vehicle, vehicle.getParkedBy(), garage.getSpace(vehicle.getParkingSpot()), garage.getSpace(vehicle.getParkingSpot()).getAcceptedPaymentSchemes().get(0));
+                garage.removeVehicle(vehicle.getLicensePlate());
+                ((SingletonService)getApplication()).saveGarage();
                 removal.setMessage(receipt.toString());
-                removal.setPositiveButton("OK", null);
+                removal.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(VehicleDetailsActivity.this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+                removal.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        Intent intent = new Intent(VehicleDetailsActivity.this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
                 removal.show();
+
             }
         });
         ((SingletonService)getApplication()).saveGarage();
+
     }
 
 }

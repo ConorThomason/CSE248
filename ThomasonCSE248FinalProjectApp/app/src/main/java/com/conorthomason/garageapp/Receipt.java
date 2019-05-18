@@ -17,7 +17,7 @@ public class Receipt extends Ticket {
 	}
 	public double getCalculatedRate(Vehicle vehicle, Space space) {
 		int parkingSpot = vehicle.getParkingSpot();
-		long hours = Duration.between(space.getTimeDateParked(), TimeControl.getCurrentTime()).toHours();
+		long hours = Duration.between(space.getTimeDateParked(), TimeControl.getCurrentTime()).toHours() + 1;
 		return hours * vehicle.getVehicleType().getHourlyRate();
 	}
 	

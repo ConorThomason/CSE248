@@ -24,6 +24,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.conorthomason.garageapp.Employee;
 import com.conorthomason.garageapp.EmployeeManagement;
@@ -32,6 +33,7 @@ import com.conorthomason.garageapp.Manager;
 import com.conorthomason.garageapp.PaymentScheme;
 import com.conorthomason.garageapp.R;
 import com.conorthomason.garageapp.SingletonService;
+import com.conorthomason.garageapp.Ticket;
 import com.conorthomason.garageapp.TimeControl;
 import com.conorthomason.garageapp.Vehicle;
 import com.conorthomason.garageapp.VehicleType;
@@ -120,11 +122,34 @@ public class MainActivity extends AppCompatActivity
                         }
 
                     Employee parkingEmployee = employees.getActiveEmployee();
-                        boolean success = garage.parkVehicle(new Vehicle(selectedType, parkingEmployee.getFullName(), plateInput.getText().toString()), selectedPayment);
+                        Vehicle newVehicle = new Vehicle(selectedType, parkingEmployee.getFullName(), plateInput.getText().toString());
+                        boolean success = garage.parkVehicle(newVehicle, selectedPayment);
                     if (!success){
                         throw new NullPointerException();
                     }
-                    //Somewhere after here, vehicles are reset to 0.
+                    else{
+                        Ticket ticket = new Ticket(newVehicle, newVehicle.getParkedBy(), selectedPayment);
+                        AlertDialog.Builder ticketAlert = new AlertDialog.Builder(MainActivity.this);
+                        ticketAlert.setTitle("Ticket");
+                        ticketAlert.setMessage(ticket.toString());
+                        ticketAlert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                            }
+                        });
+                        ticketAlert.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                            @Override
+                            public void onDismiss(DialogInterface dialog) {
+                                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                            }
+                        });
+                        ticketAlert.show();
+                    }
                     ((SingletonService)getApplication()).saveGarage();
                     printMap(garage.getVehicles());
                     } catch (NullPointerException e) {
@@ -135,6 +160,7 @@ public class MainActivity extends AppCompatActivity
                         error.setPositiveButton("OK", null);
                         error.show();
                     }
+
 
                 }
             });
@@ -160,6 +186,7 @@ public class MainActivity extends AppCompatActivity
         employees = ((SingletonService)getApplication()).getEmployeeManagementSingleton();
         garage = ((SingletonService)getApplication()).getGarageSingleton();
         garage=garage;
+        TimeControl.startTime(1);
         try {
             garage.printVehiclesKeySet();
         } catch (NullPointerException e){
@@ -193,7 +220,6 @@ public class MainActivity extends AppCompatActivity
                 Intent intent = new Intent(MainActivity.this, VehicleDetailsActivity.class);
                 intent.putExtra("Vehicle", vehicles.get(position));
                 startActivity(intent);
-                finish();
             }
         }));
 
@@ -243,20 +269,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
