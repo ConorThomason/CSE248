@@ -15,11 +15,6 @@
     </group>
     <group android:id="@+id/user_control_group">
         <item
-            android:id="@+id/employee_management"
-            android:icon="@android:drawable/ic_menu_myplaces"
-            android:title="@string/employee_management"
-            android:visible="false" />
-        <item
             android:id="@+id/sign_up_button"
             android:icon="@android:drawable/ic_menu_add"
             android:title="@string/action_sign_up"

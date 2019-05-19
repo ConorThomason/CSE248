@@ -10,14 +10,13 @@
         android:id="@+id/linearLayout4"
         android:layout_width="380dp"
         android:layout_height="235dp"
-        android:layout_marginTop="144dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="148dp"
         android:orientation="vertical"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -162,4 +161,5 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+
 </android.support.constraint.ConstraintLayout>

@@ -19,12 +19,13 @@ public class Vehicle implements Serializable {
 	private String parkedBy;
 	private int parkingSpot;
 	private String licensePlate;
+	private boolean earlyBird;
 	
 	/**
 	 * Constructs the object, usually instantiated from an Attendant class.
-	 * @param vehicleType: Enum VehicleType is used, CAR, TRUCK, or MOTORCYCLE. Rates/Early Bird can be pulled from Enum later.
-	 * @param parkedBy: String provided should be attendant name.
-	 * @param licensePlate: License plate of the vehicle. Currently doesn't differentiate on state.
+	 * @param vehicleType Enum VehicleType is used, CAR, TRUCK, or MOTORCYCLE. Rates/Early Bird can be pulled from Enum later.
+	 * @param parkedBy String provided should be attendant name.
+	 * @param licensePlate License plate of the vehicle. Currently doesn't differentiate on state.
 	 * @author Thomason
 	 */
 	public Vehicle(VehicleType vehicleType, String parkedBy, String licensePlate) {
@@ -35,15 +36,23 @@ public class Vehicle implements Serializable {
 	
 	/**
 	 * 
-	 * @param vehicleType: Enum VehicleType is used, CAR, TRUCK, or MOTORCYCLE.
-	 * @param attendant: Passes whole attendant object instead of just a string, forces full name usage.
-	 * @param licensePlate: License plate of the vehicle. Currently doesn't differentiate on state.
+	 * @param vehicleType Enum VehicleType is used, CAR, TRUCK, or MOTORCYCLE.
+	 * @param attendant Passes whole attendant object instead of just a string, forces full name usage.
+	 * @param licensePlate License plate of the vehicle. Currently doesn't differentiate on state.
 	 */
 	public Vehicle(VehicleType vehicleType, Attendant attendant, String licensePlate) {
 		this.vehicleType = vehicleType;
 		this.parkedBy = attendant.getFullName();
 		setLicensePlate(licensePlate);
 	}
+
+	public void setEarlyBird(boolean earlyBird){
+	    this.earlyBird = earlyBird;
+    }
+
+    public boolean getEarlyBird(){
+	    return this.earlyBird;
+    }
 	
 	/**
 	 * Sets current index position of Vehicle in the Garage spots list.

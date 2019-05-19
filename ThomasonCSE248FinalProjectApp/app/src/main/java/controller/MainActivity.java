@@ -20,6 +20,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
@@ -81,10 +82,12 @@ public class MainActivity extends AppCompatActivity
         radioGroup.check(R.id.carRadioButton);
         paymentRadioGroup.check(R.id.cashRadioButton);
 
+
         alert.setPositiveButton("Create Vehicle", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     final EditText plateInput = (EditText) dialogView.findViewById(R.id.vehicleCreationPlateInput);
+                    final CheckBox earlyBird = dialogView.findViewById(R.id.earlyBirdCheckBox);
 
                     int id = radioGroup.getCheckedRadioButtonId();
                     int paymentId = paymentRadioGroup.getCheckedRadioButtonId();
@@ -123,6 +126,7 @@ public class MainActivity extends AppCompatActivity
 
                     Employee parkingEmployee = employees.getActiveEmployee();
                         Vehicle newVehicle = new Vehicle(selectedType, parkingEmployee.getFullName(), plateInput.getText().toString());
+                        newVehicle.setEarlyBird(earlyBird.isChecked());
                         boolean success = garage.parkVehicle(newVehicle, selectedPayment);
                     if (!success){
                         throw new NullPointerException();
@@ -243,11 +247,9 @@ public class MainActivity extends AppCompatActivity
         Menu navMenu = navigationView.getMenu();
         if (employees.getActiveEmployee() instanceof Manager){
             navMenu.findItem(R.id.sign_up_button).setVisible(true);
-            navMenu.findItem(R.id.employee_management).setVisible(true);
         }
         else{
             navMenu.findItem(R.id.sign_up_button).setVisible(false);
-            navMenu.findItem(R.id.employee_management).setVisible(false);
         }
 
     }

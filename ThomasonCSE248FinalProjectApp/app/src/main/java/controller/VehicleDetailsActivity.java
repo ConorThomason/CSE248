@@ -47,7 +47,7 @@ public class VehicleDetailsActivity extends Activity {
             public void onClick(View v) {
                 AlertDialog.Builder removal = new AlertDialog.Builder(VehicleDetailsActivity.this);
                 removal.setTitle("Receipt");
-                Receipt receipt = new Receipt(vehicle, vehicle.getParkedBy(), garage.getSpace(vehicle.getParkingSpot()), garage.getSpace(vehicle.getParkingSpot()).getAcceptedPaymentSchemes().get(0));
+                Receipt receipt = new Receipt(vehicle, vehicle.getParkedBy(), garage.getSpace(vehicle.getParkingSpot()), garage.getSpace(vehicle.getParkingSpot()).getAcceptedPaymentSchemes().get(0), vehicle.getEarlyBird());
                 garage.removeVehicle(vehicle.getLicensePlate());
                 ((SingletonService)getApplication()).saveGarage();
                 removal.setMessage(receipt.toString());
