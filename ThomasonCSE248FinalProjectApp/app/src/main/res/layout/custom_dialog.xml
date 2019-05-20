@@ -4,15 +4,15 @@
     android:layout_height="wrap_content"
     android:gravity="center"
     android:orientation="vertical"
-    android:paddingLeft="5dp"
+    android:paddingLeft="25dp"
     android:paddingRight="15dp">
 
     <LinearLayout
-        android:layout_width="355dp"
+        android:layout_width="244dp"
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="239dp"
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
@@ -52,7 +52,7 @@
 
             <RadioGroup
                 android:id="@+id/vehicleRadioGroup"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent">
 
                 <RadioButton
