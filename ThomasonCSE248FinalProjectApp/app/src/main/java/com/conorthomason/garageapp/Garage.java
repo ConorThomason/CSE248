@@ -232,6 +232,7 @@ public class Garage implements Serializable {
      * @return boolean success
      */
 	public boolean parkVehicle(Vehicle vehicle, PaymentScheme payment) {
+	    TimeControl.startTime(1);
 	    ArrayList<PaymentScheme> paymentSchemes = new ArrayList<>();
 	    paymentSchemes.add(payment);
 		int carOffset = carSpaces - currentCars;
@@ -240,33 +241,34 @@ public class Garage implements Serializable {
 		if (spaceAvailable(vehicle.getVehicleType())) {
 			switch(vehicle.getVehicleType()) {
 			case CAR:
-				vehicle.setParkingSpot(carOffset);
-				spaces.get(carSpaces - currentCars).setVehicleLicense(vehicle.getLicensePlate());
-                spaces.get(carSpaces - currentCars).setTimeDateParked(TimeControl.getCurrentTime());
-                spaces.get(carSpaces - currentCars).setAcceptedPaymentSchemes(paymentSchemes);
+				vehicle.setParkingSpot(carOffset - 1);
+				spaces.get(carOffset - 1).setVehicleLicense(vehicle.getLicensePlate());
+                spaces.get(carOffset - 1).setTimeDateParked(TimeControl.getCurrentTime());
+                spaces.get(carOffset - 1).setAcceptedPaymentSchemes(paymentSchemes);
                 currentCars++;
 				break;
 			case MOTORCYCLE:
-				vehicle.setParkingSpot(motorcycleOffset);
-				spaces.get(motorcycleSpaces - currentMotorcycles).setVehicleLicense(vehicle.getLicensePlate());
-                spaces.get(motorcycleSpaces - currentMotorcycles).setTimeDateParked(TimeControl.getCurrentTime());
-                spaces.get(motorcycleSpaces - currentMotorcycles).setAcceptedPaymentSchemes(paymentSchemes);
+				vehicle.setParkingSpot(motorcycleOffset - 1);
+				spaces.get(motorcycleOffset - 1).setVehicleLicense(vehicle.getLicensePlate());
+                spaces.get(motorcycleOffset - 1).setTimeDateParked(TimeControl.getCurrentTime());
+                spaces.get(motorcycleOffset - 1).setAcceptedPaymentSchemes(paymentSchemes);
 				currentMotorcycles++;
 				break;
 			case TRUCK:
-				vehicle.setParkingSpot(truckOffset);
-				spaces.get(truckSpaces - currentTrucks).setVehicleLicense(vehicle.getLicensePlate());
-                spaces.get(truckSpaces - currentTrucks).setTimeDateParked(TimeControl.getCurrentTime());
-                spaces.get(truckSpaces - currentTrucks).setAcceptedPaymentSchemes(paymentSchemes);
+				vehicle.setParkingSpot(truckOffset - 1);
+				spaces.get(truckOffset - 1).setVehicleLicense(vehicle.getLicensePlate());
+                spaces.get(truckOffset - 1).setTimeDateParked(TimeControl.getCurrentTime());
+                spaces.get(truckOffset - 1).setAcceptedPaymentSchemes(paymentSchemes);
 				currentTrucks++;
 				break;
 			default:
 				break;
 			}
 			addVehicle(vehicle);
-
+			TimeControl.stopTime();
 			return true;
 		}
+		TimeControl.stopTime();
 		return false;
 	}
 

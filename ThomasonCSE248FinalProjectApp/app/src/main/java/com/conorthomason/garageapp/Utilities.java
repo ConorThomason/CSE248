@@ -25,9 +25,15 @@ public final class Utilities {
      * @return String output Returns string after converting instant to a simpler form.
      */
 	public static String zoneStringFormat(Instant currentInstant) {
+	    String output;
 		DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)
 				.withLocale(Locale.US).withZone(TimeControl.getDefaultZone());
-		String output = formatter.format(currentInstant);
+		try {
+		    output = formatter.format(currentInstant);
+        } catch (NullPointerException e){
+		    e.printStackTrace();
+		    return "Time Retrieval Failed";
+        }
 		return output;
 	}
 }
