@@ -20,9 +20,9 @@ class ReceiptTests {
 		TimeControl.createTimeThread(1);
 		garage.createGarage(carPayment, motorcyclePayment, truckPayment, 5, 5, 5);
 		Vehicle vehicle = new Vehicle(VehicleType.CAR, "John", "AA12 345");
-		garage.parkVehicle(vehicle);
+		garage.parkVehicle(vehicle, PaymentScheme.CASH);
 		Attendant attendant = new Attendant("Test", "123", "John", "Doe");
-		Receipt receipt = new Receipt(vehicle, attendant, garage.getSpace(vehicle.getParkingSpot()), PaymentScheme.CASH);
+		Receipt receipt = new Receipt(vehicle, attendant.getFullName(), garage.getSpace(vehicle.getParkingSpot()), PaymentScheme.CASH, false);
 		assertTrue(vehicle.getLicensePlate().equals(receipt.getLicensePlate()));
 		assertTrue(vehicle.getVehicleType().equals(receipt.getVehicleType()));
 		assertTrue(attendant.getFullName().equals(receipt.getAttendantName()));

@@ -26,7 +26,7 @@ class TicketTests {
 		TimeControl.createTimeThread(1);
 		Vehicle testVehicle = new Vehicle(VehicleType.CAR, "Test", "TEST PLA"); //Actual use-case
 		Attendant testAttendant = new Attendant("Test", "Test", "FirstTest", "LastTest");
-		Ticket ticket = new Ticket(testVehicle, testAttendant, PaymentScheme.CASH);
+		Ticket ticket = new Ticket(testVehicle, testAttendant.getFullName(), PaymentScheme.CASH);
 		assertTrue(ticket.getLicensePlate().equals("TESTPLA"));
 		assertTrue(ticket.getVehicleType() == VehicleType.CAR);
 		assertTrue(ticket.getAttendantName().equals("FirstTest LastTest"));

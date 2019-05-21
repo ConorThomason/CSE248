@@ -27,21 +27,21 @@ class GarageTests {
 	void parkVehicleTest() {
 		garage.createGarage(carPayment, motorcyclePayment, truckPayment, 5, 5, 5);
 		Vehicle testVehicle = new Vehicle(VehicleType.CAR, "Test", "TEST PLA");
-		assertTrue(garage.parkVehicle(testVehicle));
+		assertTrue(garage.parkVehicle(testVehicle, PaymentScheme.CASH));
 	}
 	
 	@Test
 	void findVehicleTest() {
 		garage.createGarage(carPayment, motorcyclePayment, truckPayment, 5, 5, 5);
 		Vehicle testVehicle = new Vehicle(VehicleType.CAR, "Test", "TEST PLA");
-		assertTrue(garage.parkVehicle(testVehicle));
+		assertTrue(garage.parkVehicle(testVehicle, PaymentScheme.CASH));
 		assertTrue(garage.findVehicle(testVehicle.getLicensePlate()));
 	}
 	@Test
 	void getVehicleTest() {
 		garage.createGarage(carPayment, motorcyclePayment, truckPayment, 5, 5, 5);
 		Vehicle testVehicle = new Vehicle(VehicleType.CAR, "Test", "TEST PLA");
-		assertTrue(garage.parkVehicle(testVehicle));
+		assertTrue(garage.parkVehicle(testVehicle, PaymentScheme.CASH));
 		assertTrue(garage.findVehicle(testVehicle.getLicensePlate()));
 		assertEquals(testVehicle, garage.getVehicle("TESTPLA"));
 	}
@@ -50,8 +50,8 @@ class GarageTests {
         garage.createGarage(carPayment, motorcyclePayment, truckPayment, 5, 5, 5);
         Vehicle testVehicle = new Vehicle(VehicleType.CAR, "Test", "TEST PLA");
         Vehicle testVehicle2 = new Vehicle(VehicleType.CAR, "Test2", "TEST PLA2");
-        garage.parkVehicle(testVehicle);
-        garage.parkVehicle(testVehicle2);
+        garage.parkVehicle(testVehicle, PaymentScheme.CASH);
+        garage.parkVehicle(testVehicle2, PaymentScheme.CASH);
         assertTrue(garage.getVehicle("TESTPLA").equals(testVehicle));
         assertTrue(garage.getVehicle("TESTPLA2").equals(testVehicle2));
     }
