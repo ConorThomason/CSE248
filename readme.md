@@ -1,4 +1,4 @@
-CSE248 Garage Management Final Project - Conor Thomason
+**CSE248 Garage Management Final Project - Conor Thomason**
 
 This project is representative of my interpretation of a parking garage being managed through an Android interface. It uses a singleton data structure to allow Garage and EmployeeManagement to be called from anywhere, by utilizing Application to keep it running in the background throughout the app running.
 
